@@ -1,4 +1,4 @@
-title: ILS An R package for statistical analysis in Interlaboratory Studies
+title: ILS
 url: http://davidtorres1818.github.io/ILSR6V1
 template:
   params:
@@ -6,7 +6,7 @@ template:
 ganalytics: UA-84499524-2
 reference:
   - title: Exported Functions
-desc: "Hola"
+desc: 'Hola'
   contents:
   - '`F2`'
 - title: Internals
