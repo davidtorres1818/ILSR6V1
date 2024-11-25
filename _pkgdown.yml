@@ -8,7 +8,7 @@ reference:
   - title: Exported Functions
 desc: Hola
   contents:
-  - '`F2`'
+  - 'F2'
 - title: Internals
 desc: ~
   contents:
