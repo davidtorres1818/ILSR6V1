@@ -1,12 +1,15 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ILSR6V1
+# ILS: An R package for statistical analysis in Interlaboratory Studies
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of ILSR6V1 is to ahhhhhhhhhhhhhhhh
+The aim of the ILS package is to detect laboratories that provide not
+consistent results, working simultaneously with different test
+materials, from the perspective of the Univariate Data Analysis and the
+Functional Data Analysis (FDA).
 
 ## Installation
 
