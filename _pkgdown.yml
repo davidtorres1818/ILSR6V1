@@ -12,7 +12,7 @@ navbar:
 href: articles/index.html
 dedication:
   text: Dedication
-href: articles/index.html
+href: articles/ILSR6V1.html
 structure:
   left:  [intro, faq, dedication, reference, articles, tutorials, news]
 right: [search, github, lightswitch]
