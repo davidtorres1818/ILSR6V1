@@ -6,13 +6,4 @@ template:
 ganalytics: UA-84499524-2
 
 navbar:
-  components:
-  faq:
-  text:  FAQ
-href: articles/index.html
-dedication:
-  text: Dedication
-href: articles/ILSR6V1.html
-structure:
-  left:  [intro, faq, dedication, reference, articles, tutorials, news]
-right: [search, github, lightswitch]
+  type: inverse
