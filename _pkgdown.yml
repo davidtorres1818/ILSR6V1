@@ -8,11 +8,11 @@ reference:
   - title: Exported Functions
 desc: ~
   contents:
-  - '`F_example`'
+  - 'Uno'
 - title: Internals
 desc: ~
   contents:
-  - '`F_example_2`'
+  - '`Dos`'
 navbar:
   components:
   faq:
