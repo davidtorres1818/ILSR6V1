@@ -7,11 +7,30 @@ ganalytics: UA-84499524-2
 
 navbar:
   type: inverse
-
-left:
-    - icon: fa-home
-      href: index.html
-    - text: "How To"
-      menu:
-      -  text: Installation
-         href: articles/index.html
+  left:
+      - icon: fa-home
+        href: index.html
+      - text: "Quality Control Packages"
+        menu:
+        -  text: R6Qualitytools
+           href: articles/index.html
+        -  text: ILS
+           href: articles/index.html
+        -  text: QCR
+           href: articles/index.html
+        -  text: QUEE
+           href: articles/index.html
+      - text: "Functions ILS"
+        href: articles/index.html
+      - text: "Examples of Use"
+        href: articles/index.html
+      - text: "Acknowledgements"
+        menu:
+        -  text: University of A Coruña
+           href: articles/index.html
+        -  text: Escuela Politécnica Nacional
+           href: articles/index.html
+  right:
+      - text: "faq"
+        icon: fa-question-circle-o
+        href: articles/index.html
