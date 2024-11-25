@@ -6,13 +6,13 @@ template:
 ganalytics: UA-84499524-2
 reference:
   - title: Exported Functions
-desc: 'Hola'
+desc: Hola
   contents:
   - '`F2`'
 - title: Internals
 desc: ~
   contents:
-#  - '`Dos`'
+  - '`F_example`'
 navbar:
   components:
   faq:
