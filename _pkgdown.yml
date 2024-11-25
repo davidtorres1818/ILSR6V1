@@ -7,3 +7,11 @@ ganalytics: UA-84499524-2
 
 navbar:
   type: inverse
+
+left:
+    - icon: fa-home
+      href: index.html
+    - text: "How To"
+      menu:
+      -  text: Installation
+         href: articles/index.html
