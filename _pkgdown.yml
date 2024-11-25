@@ -8,10 +8,11 @@ reference:
   - title: Exported Functions
 desc: Hola
   contents:
+  - Uno
 - title: Internals
 desc: ~
   contents:
-  - '`F_example`'
+  - Dos
 navbar:
   components:
   faq:
