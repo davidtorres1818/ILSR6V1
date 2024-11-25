@@ -22,10 +22,11 @@ The goal of ILSR6V1 is to ...
 
 ## Installation
 
-You can install the development version of ILSR6V1 like so:
+You can install the development version of ILSR6V1 from [GitHub](https://github.com/) with:
 
 ``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+# install.packages("pak")
+pak::pak("davidtorres1818/ILSR6V1")
 ```
 
 ## Example
