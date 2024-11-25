@@ -8,11 +8,11 @@ reference:
   - title: Exported Functions
 desc: ~
   contents:
-  - 'Uno'
+#  - 'Uno'
 - title: Internals
 desc: ~
   contents:
-  - '`Dos`'
+#  - '`Dos`'
 navbar:
   components:
   faq:
