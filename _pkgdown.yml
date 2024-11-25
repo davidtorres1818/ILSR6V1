@@ -1,0 +1,31 @@
+title: ILS: An R package for statistical analysis in Interlaboratory Studies
+url: http://davidtorres1818.github.io/ILSR6V1
+template:
+  params:
+  bootswatch: flatly
+ganalytics: UA-84499524-2
+reference:
+  - title: Exported Functions
+desc: ~
+  contents:
+  - '`F_example`'
+- title: Internals
+desc: ~
+  contents:
+  - '`F_example`'
+navbar:
+  components:
+  faq:
+  text:  FAQ
+href: articles/index.html
+dedication:
+  text: Dedication
+href: href: articles/index.html
+structure:
+  left:  [intro, faq, dedication, reference, articles, tutorials, news]
+right: [search, github, lightswitch]
+
+
+extra_packages:
+  - tidyr
+- tibbletime
