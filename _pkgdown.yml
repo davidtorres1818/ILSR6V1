@@ -8,7 +8,7 @@ reference:
   - title: Exported Functions
 desc: ~
   contents:
-  - 'Uno'
+  - '`F2`'
 - title: Internals
 desc: ~
   contents:
