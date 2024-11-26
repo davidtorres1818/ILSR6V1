@@ -58,13 +58,12 @@ found below:
 
 -   **Interlaboratory Study (ILS)**:
 
-```{r GUIfig, echo=FALSE, fig.align="center", fig.width=10, message=FALSE, warning=FALSE}
-  library(png)
-  library(grid)
-  library(knitr)
-  img <- readPNG("ILS_Overview.PNG")
-  grid.raster(img)
-```
+# ```{r , echo=FALSE, fig.align="center", fig.width=10, message=FALSE, warning=FALSE}
+#   library(png)
+#   library(grid)
+#   img <- readPNG("ILS_Overview.PNG")
+#   grid.raster(img)
+# ```
 
     This concept can be defined as a control procedure to
     evaluate the performance of a group of laboratories through a collaborative
