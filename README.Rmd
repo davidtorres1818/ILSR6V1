@@ -418,7 +418,7 @@ summary(h)
 
 -   **Outliers detection**
 
- laboratories with very extreme results were detected by using the
+Laboratories with very extreme results were detected by using the
 Grubbs’ test, i.e. laboratories defined by very large or small results (glucose
 content).
 
@@ -427,7 +427,7 @@ grubbs.test(qcdata)
 ```
 
 Once the outlier laboratories are removed, one-way ANOVA analysis and
-mean comparison test can be performed [1]. The ILS package provides function
+mean comparison test can be performed. The ILS package provides function
 ils.aov() to perform an analysis of variance considering random or fixed effects
 of the laboratory factor depending on the value of the random argument. By
 setting this parameter to TRUE, a random effects one-way ANOVA is done for

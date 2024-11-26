@@ -526,7 +526,7 @@ summary(h)
 
 -   **Outliers detection**
 
-laboratories with very extreme results were detected by using the
+Laboratories with very extreme results were detected by using the
 Grubbs’ test, i.e. laboratories defined by very large or small results
 (glucose content).
 
@@ -547,14 +547,14 @@ grubbs.test(qcdata)
 ```
 
 Once the outlier laboratories are removed, one-way ANOVA analysis and
-mean comparison test can be performed \[1\]. The ILS package provides
-function ils.aov() to perform an analysis of variance considering random
-or fixed effects of the laboratory factor depending on the value of the
-random argument. By setting this parameter to TRUE, a random effects
-one-way ANOVA is done for each material, providing the corresponding F
-tests and confidence intervals for the variances. For instance, the
-following code shows an example using the results of one material for
-the sake of simplicity.
+mean comparison test can be performed. The ILS package provides function
+ils.aov() to perform an analysis of variance considering random or fixed
+effects of the laboratory factor depending on the value of the random
+argument. By setting this parameter to TRUE, a random effects one-way
+ANOVA is done for each material, providing the corresponding F tests and
+confidence intervals for the variances. For instance, the following code
+shows an example using the results of one material for the sake of
+simplicity.
 
 ``` r
 Glucose2 <- subset(Glucose, Material == "A")
@@ -595,7 +595,7 @@ lab.aov(Glucose2, random = TRUE, level = 0.95)
 #> Lab8 - Lab3 == 0  1.126667   0.868119   1.298    0.887
 #> Lab5 - Lab4 == 0  0.006667   0.868119   0.008    1.000
 #> Lab6 - Lab4 == 0  0.563333   0.868119   0.649    0.997
-#> Lab7 - Lab4 == 0 -1.000000   0.868119  -1.152    0.935
+#> Lab7 - Lab4 == 0 -1.000000   0.868119  -1.152    0.934
 #> Lab8 - Lab4 == 0  1.120000   0.868119   1.290    0.890
 #> Lab6 - Lab5 == 0  0.556667   0.868119   0.641    0.998
 #> Lab7 - Lab5 == 0 -1.006667   0.868119  -1.160    0.932
@@ -613,40 +613,40 @@ lab.aov(Glucose2, random = TRUE, level = 0.95)
 #> 
 #> Fit: aov(formula = y ~ laboratory, data = data)
 #> 
-#> Quantile = 3.4626
+#> Quantile = 3.4603
 #> 95% family-wise confidence level
 #>  
 #> 
 #> Linear Hypotheses:
 #>                  Estimate  lwr       upr      
-#> Lab2 - Lab1 == 0  0.156667 -2.849317  3.162651
-#> Lab3 - Lab1 == 0  0.166667 -2.839317  3.172651
-#> Lab4 - Lab1 == 0  0.173333 -2.832651  3.179317
-#> Lab5 - Lab1 == 0  0.180000 -2.825984  3.185984
-#> Lab6 - Lab1 == 0  0.736667 -2.269317  3.742651
-#> Lab7 - Lab1 == 0 -0.826667 -3.832651  2.179317
-#> Lab8 - Lab1 == 0  1.293333 -1.712651  4.299317
-#> Lab3 - Lab2 == 0  0.010000 -2.995984  3.015984
-#> Lab4 - Lab2 == 0  0.016667 -2.989317  3.022651
-#> Lab5 - Lab2 == 0  0.023333 -2.982651  3.029317
-#> Lab6 - Lab2 == 0  0.580000 -2.425984  3.585984
-#> Lab7 - Lab2 == 0 -0.983333 -3.989317  2.022651
-#> Lab8 - Lab2 == 0  1.136667 -1.869317  4.142651
-#> Lab4 - Lab3 == 0  0.006667 -2.999317  3.012651
-#> Lab5 - Lab3 == 0  0.013333 -2.992651  3.019317
-#> Lab6 - Lab3 == 0  0.570000 -2.435984  3.575984
-#> Lab7 - Lab3 == 0 -0.993333 -3.999317  2.012651
-#> Lab8 - Lab3 == 0  1.126667 -1.879317  4.132651
-#> Lab5 - Lab4 == 0  0.006667 -2.999317  3.012651
-#> Lab6 - Lab4 == 0  0.563333 -2.442651  3.569317
-#> Lab7 - Lab4 == 0 -1.000000 -4.005984  2.005984
-#> Lab8 - Lab4 == 0  1.120000 -1.885984  4.125984
-#> Lab6 - Lab5 == 0  0.556667 -2.449317  3.562651
-#> Lab7 - Lab5 == 0 -1.006667 -4.012651  1.999317
-#> Lab8 - Lab5 == 0  1.113333 -1.892651  4.119317
-#> Lab7 - Lab6 == 0 -1.563333 -4.569317  1.442651
-#> Lab8 - Lab6 == 0  0.556667 -2.449317  3.562651
-#> Lab8 - Lab7 == 0  2.120000 -0.885984  5.125984
+#> Lab2 - Lab1 == 0  0.156667 -2.847316  3.160650
+#> Lab3 - Lab1 == 0  0.166667 -2.837316  3.170650
+#> Lab4 - Lab1 == 0  0.173333 -2.830650  3.177316
+#> Lab5 - Lab1 == 0  0.180000 -2.823983  3.183983
+#> Lab6 - Lab1 == 0  0.736667 -2.267316  3.740650
+#> Lab7 - Lab1 == 0 -0.826667 -3.830650  2.177316
+#> Lab8 - Lab1 == 0  1.293333 -1.710650  4.297316
+#> Lab3 - Lab2 == 0  0.010000 -2.993983  3.013983
+#> Lab4 - Lab2 == 0  0.016667 -2.987316  3.020650
+#> Lab5 - Lab2 == 0  0.023333 -2.980650  3.027316
+#> Lab6 - Lab2 == 0  0.580000 -2.423983  3.583983
+#> Lab7 - Lab2 == 0 -0.983333 -3.987316  2.020650
+#> Lab8 - Lab2 == 0  1.136667 -1.867316  4.140650
+#> Lab4 - Lab3 == 0  0.006667 -2.997316  3.010650
+#> Lab5 - Lab3 == 0  0.013333 -2.990650  3.017316
+#> Lab6 - Lab3 == 0  0.570000 -2.433983  3.573983
+#> Lab7 - Lab3 == 0 -0.993333 -3.997316  2.010650
+#> Lab8 - Lab3 == 0  1.126667 -1.877316  4.130650
+#> Lab5 - Lab4 == 0  0.006667 -2.997316  3.010650
+#> Lab6 - Lab4 == 0  0.563333 -2.440650  3.567316
+#> Lab7 - Lab4 == 0 -1.000000 -4.003983  2.003983
+#> Lab8 - Lab4 == 0  1.120000 -1.883983  4.123983
+#> Lab6 - Lab5 == 0  0.556667 -2.447316  3.560650
+#> Lab7 - Lab5 == 0 -1.006667 -4.010650  1.997316
+#> Lab8 - Lab5 == 0  1.113333 -1.890650  4.117316
+#> Lab7 - Lab6 == 0 -1.563333 -4.567316  1.440650
+#> Lab8 - Lab6 == 0  0.556667 -2.447316  3.560650
+#> Lab8 - Lab7 == 0  2.120000 -0.883983  5.123983
 #> $Models
 #> $Models$`Material: A`
 #> Call:
@@ -671,40 +671,40 @@ lab.aov(Glucose2, random = TRUE, level = 0.95)
 #> 
 #> Fit: aov(formula = y ~ laboratory, data = data)
 #> 
-#> Quantile = 3.4626
+#> Quantile = 3.4603
 #> 95% family-wise confidence level
 #>  
 #> 
 #> Linear Hypotheses:
 #>                  Estimate  lwr       upr      
-#> Lab2 - Lab1 == 0  0.156667 -2.849317  3.162651
-#> Lab3 - Lab1 == 0  0.166667 -2.839317  3.172651
-#> Lab4 - Lab1 == 0  0.173333 -2.832651  3.179317
-#> Lab5 - Lab1 == 0  0.180000 -2.825984  3.185984
-#> Lab6 - Lab1 == 0  0.736667 -2.269317  3.742651
-#> Lab7 - Lab1 == 0 -0.826667 -3.832651  2.179317
-#> Lab8 - Lab1 == 0  1.293333 -1.712651  4.299317
-#> Lab3 - Lab2 == 0  0.010000 -2.995984  3.015984
-#> Lab4 - Lab2 == 0  0.016667 -2.989317  3.022651
-#> Lab5 - Lab2 == 0  0.023333 -2.982651  3.029317
-#> Lab6 - Lab2 == 0  0.580000 -2.425984  3.585984
-#> Lab7 - Lab2 == 0 -0.983333 -3.989317  2.022651
-#> Lab8 - Lab2 == 0  1.136667 -1.869317  4.142651
-#> Lab4 - Lab3 == 0  0.006667 -2.999317  3.012651
-#> Lab5 - Lab3 == 0  0.013333 -2.992651  3.019317
-#> Lab6 - Lab3 == 0  0.570000 -2.435984  3.575984
-#> Lab7 - Lab3 == 0 -0.993333 -3.999317  2.012651
-#> Lab8 - Lab3 == 0  1.126667 -1.879317  4.132651
-#> Lab5 - Lab4 == 0  0.006667 -2.999317  3.012651
-#> Lab6 - Lab4 == 0  0.563333 -2.442651  3.569317
-#> Lab7 - Lab4 == 0 -1.000000 -4.005984  2.005984
-#> Lab8 - Lab4 == 0  1.120000 -1.885984  4.125984
-#> Lab6 - Lab5 == 0  0.556667 -2.449317  3.562651
-#> Lab7 - Lab5 == 0 -1.006667 -4.012651  1.999317
-#> Lab8 - Lab5 == 0  1.113333 -1.892651  4.119317
-#> Lab7 - Lab6 == 0 -1.563333 -4.569317  1.442651
-#> Lab8 - Lab6 == 0  0.556667 -2.449317  3.562651
-#> Lab8 - Lab7 == 0  2.120000 -0.885984  5.125984
+#> Lab2 - Lab1 == 0  0.156667 -2.847316  3.160650
+#> Lab3 - Lab1 == 0  0.166667 -2.837316  3.170650
+#> Lab4 - Lab1 == 0  0.173333 -2.830650  3.177316
+#> Lab5 - Lab1 == 0  0.180000 -2.823983  3.183983
+#> Lab6 - Lab1 == 0  0.736667 -2.267316  3.740650
+#> Lab7 - Lab1 == 0 -0.826667 -3.830650  2.177316
+#> Lab8 - Lab1 == 0  1.293333 -1.710650  4.297316
+#> Lab3 - Lab2 == 0  0.010000 -2.993983  3.013983
+#> Lab4 - Lab2 == 0  0.016667 -2.987316  3.020650
+#> Lab5 - Lab2 == 0  0.023333 -2.980650  3.027316
+#> Lab6 - Lab2 == 0  0.580000 -2.423983  3.583983
+#> Lab7 - Lab2 == 0 -0.983333 -3.987316  2.020650
+#> Lab8 - Lab2 == 0  1.136667 -1.867316  4.140650
+#> Lab4 - Lab3 == 0  0.006667 -2.997316  3.010650
+#> Lab5 - Lab3 == 0  0.013333 -2.990650  3.017316
+#> Lab6 - Lab3 == 0  0.570000 -2.433983  3.573983
+#> Lab7 - Lab3 == 0 -0.993333 -3.997316  2.010650
+#> Lab8 - Lab3 == 0  1.126667 -1.877316  4.130650
+#> Lab5 - Lab4 == 0  0.006667 -2.997316  3.010650
+#> Lab6 - Lab4 == 0  0.563333 -2.440650  3.567316
+#> Lab7 - Lab4 == 0 -1.000000 -4.003983  2.003983
+#> Lab8 - Lab4 == 0  1.120000 -1.883983  4.123983
+#> Lab6 - Lab5 == 0  0.556667 -2.447316  3.560650
+#> Lab7 - Lab5 == 0 -1.006667 -4.010650  1.997316
+#> Lab8 - Lab5 == 0  1.113333 -1.890650  4.117316
+#> Lab7 - Lab6 == 0 -1.563333 -4.567316  1.440650
+#> Lab8 - Lab6 == 0  0.556667 -2.447316  3.560650
+#> Lab8 - Lab7 == 0  2.120000 -0.883983  5.123983
 ```
 
 <br> <br>

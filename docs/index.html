@@ -232,6 +232,7 @@
 <div class="section level2">
 <h2 id="1-clinical-study-of-blood-glucose-measurement">1) Clinical study of blood glucose measurement<a class="anchor" aria-label="anchor" href="#1-clinical-study-of-blood-glucose-measurement"></a>
 </h2>
+<ul><li><strong>Graphical and analytical statistics</strong></li></ul>
 <p>The Glucose dataset corresponds to the serum glucose test (measurements of the concentration of glucose in the blood used to control the diabetes). In this study, eight laboratories where involved, and five different tests were performed on blood samples labelled with different references, ranging from a low sugar content to a very high one. Three replicates were obtained for each sample.</p>
 <p>Each of these laboratories measured five different concentration levels (A, B, C, D, E) of a given material, and at each of these levels, three measurements were taken (3 replicates). Each laboratory provided a total of 15 measurements (3 for each level), therefore, with 8 laboratories involved, 120 measurements were obtained.</p>
 <p>In order to access this dataset, the ILS package installing and loading is required. Once loading is performed, the Glucose data.frame object is called using the following instructions.</p>
@@ -257,21 +258,288 @@
 <span>     xlab <span class="op">=</span> <span class="st">"Glucose concentration in blood"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-example_2-1.png" width="100%"></p>
 <p>The figure shows the obtained values for each laboratory and material. It can be noted that the blood glucose level increases from material A to D and there is more variability between the results for each laboratory from material C to material E.</p>
-<p><br><br><br></p>
-<p>What is special about using <code>README.Rmd</code> instead of just <code>README.md</code>? You can include R chunks like so:</p>
+<p><br></p>
+<p>In order to calculate the graphical and analytical statistics for the scalar (univariate) case, first, the function lab.qcs() (quality control statistics) has to be used. This function returns the estimates of the statistical required measures (mean, variance, etc.) for computing the Mandel’s h and k statistics, as well as the required measures to perform the Cochran and Grubbs tests.</p>
+<p>In the following commands, the lab.qcs() function uses the qcdata object to create the qcstat object that estimates both the mean and the global deviation from the results of all laboratories and all materials. The repeatability deviation (Sr), the deviation between the means of laboratories (SB), and the reproducibility deviation (SR) for each material are also estimated (following ASTM E-691)</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">cars</span><span class="op">)</span></span>
-<span><span class="co">#&gt;      speed           dist       </span></span>
-<span><span class="co">#&gt;  Min.   : 4.0   Min.   :  2.00  </span></span>
-<span><span class="co">#&gt;  1st Qu.:12.0   1st Qu.: 26.00  </span></span>
-<span><span class="co">#&gt;  Median :15.0   Median : 36.00  </span></span>
-<span><span class="co">#&gt;  Mean   :15.4   Mean   : 42.98  </span></span>
-<span><span class="co">#&gt;  3rd Qu.:19.0   3rd Qu.: 56.00  </span></span>
-<span><span class="co">#&gt;  Max.   :25.0   Max.   :120.00</span></span></code></pre></div>
-<p>You’ll still need to render <code>README.Rmd</code> regularly, to keep <code>README.md</code> up-to-date. <code><a href="https://devtools.r-lib.org/reference/build_rmd.html" class="external-link">devtools::build_readme()</a></code> is handy for this.</p>
-<p>You can also embed plots, for example:</p>
-<p><img src="reference/figures/README-pressure-1.png" width="100%"></p>
-<p>In that case, don’t forget to commit and push the resulting figure files, so they display on GitHub and CRAN.</p>
+<code class="sourceCode R"><span><span class="va">qcstat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ILS/man/lab.qcs.html" class="external-link">lab.qcs</a></span><span class="op">(</span><span class="va">qcdata</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">qcstat</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Number of laboratories:  8</span></span>
+<span><span class="co">#&gt; Number of materials:  5</span></span>
+<span><span class="co">#&gt; Number of replicate:  3</span></span>
+<span><span class="co">#&gt; Summary for Laboratory (means):</span></span>
+<span><span class="co">#&gt;        Lab1      Lab2      Lab3      Lab4      Lab5      Lab6      Lab7</span></span>
+<span><span class="co">#&gt; A  41.28333  41.44000  41.45000  41.45667  41.46333  42.02000  40.45667</span></span>
+<span><span class="co">#&gt; B  78.31667  79.23333  79.90333  80.96333  78.69000  79.89333  79.51667</span></span>
+<span><span class="co">#&gt; C 133.19667 135.40667 134.59000 140.83000 133.26667 136.61667 132.49333</span></span>
+<span><span class="co">#&gt; D 193.65000 195.10667 192.09000 197.21333 193.05000 197.24333 191.26000</span></span>
+<span><span class="co">#&gt; E 293.25333 298.91667 292.67000 295.82000 293.56333 294.95667 290.13667</span></span>
+<span><span class="co">#&gt;        Lab8</span></span>
+<span><span class="co">#&gt; A  42.57667</span></span>
+<span><span class="co">#&gt; B  80.34667</span></span>
+<span><span class="co">#&gt; C 134.71000</span></span>
+<span><span class="co">#&gt; D 198.12333</span></span>
+<span><span class="co">#&gt; E 296.62000</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Summary for Laboratory (Deviations):</span></span>
+<span><span class="co">#&gt;        Lab1      Lab2      Lab3      Lab4      Lab5     Lab6     Lab7      Lab8</span></span>
+<span><span class="co">#&gt; A 0.2230097 0.4850773 1.0608016 1.8117763 0.3666515 1.408119 1.247811 0.8224557</span></span>
+<span><span class="co">#&gt; B 0.1582193 1.3268509 0.8303212 2.7660863 0.7754354 1.636592 2.059935 0.5064912</span></span>
+<span><span class="co">#&gt; C 0.5909597 2.1679791 1.7287857 6.6200227 1.1987215 1.287025 2.124296 1.0343597</span></span>
+<span><span class="co">#&gt; D 0.0600000 4.6824068 1.5932043 1.9365519 1.8826311 1.649616 3.817709 2.4637844</span></span>
+<span><span class="co">#&gt; E 0.7266590 9.1869055 2.7101107 0.8835723 0.9543759 4.034282 3.304184 1.6479078</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Summary for Material:</span></span>
+<span><span class="co">#&gt;        mean         S      S_r       S_B      S_R</span></span>
+<span><span class="co">#&gt; A  41.51833 0.5543251 1.063224 0.6061274 1.058783</span></span>
+<span><span class="co">#&gt; B  79.60792 0.8664835 1.496071 0.8627346 1.495481</span></span>
+<span><span class="co">#&gt; C 135.13875 1.9071053 2.750879 2.6566872 3.478919</span></span>
+<span><span class="co">#&gt; D 194.71708 1.4262962 2.625065 2.5950046 3.365713</span></span>
+<span><span class="co">#&gt; E 294.49208 2.8067799 3.934974 2.6931364 4.192334</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">qcstat</span>,</span>
+<span>     xlab <span class="op">=</span> <span class="st">"Deviations"</span>,</span>
+<span>     ylab <span class="op">=</span> <span class="st">"Material"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-example_3-1.png" width="100%"></p>
+<p>In the figure presented,, the values of S (the global deviation of all laboratories), Sr (the repeatability’s deviation), SR (reproducibility’s deviation) and SB (the deviation between the means of the laboratories) are shown for each material. A greater variability can be noted from material C to material E. Materials C and D have a greater variability between the results of the laboratories (SR) and within them (Sr).</p>
+<p><br></p>
+<ul><li><strong>Consistency tests</strong></li></ul>
+<p>First, an analysis of the variability for each laboratory will be performed. For this purpose, the k statistic (k.qcs()) and the Cochran test (cochran.test()) will be used to identify if there is any laboratory with non-consistent results. Subsequently, the h statistic (h.qcs()) and the Grubbs test (grubbs.test()) will be used to perform an analysis to evaluate inter-laboratory variability.</p>
+<p>The following code creates an object containing the scalar Mandel’s k statistic for each laboratory and material, which is subsequently plotted:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">k</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ILS/man/k.qcs.html" class="external-link">k.qcs</a></span><span class="op">(</span><span class="va">qcdata</span>, alpha <span class="op">=</span> <span class="fl">0.005</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">k</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-example_4-1.png" width="100%"></p>
+<p><br><br><br></p>
+<p>In the figure above, the dotted line represents the critical value equal to 2.06, obtained for p = 8, n = 15 and α = 0.005 (following the ASTM standard). Hence, outliers were detected for the laboratory 2, when testing the material 5, and for material 3, when is tested by the laboratory 4, since the corresponding values of the k statistics were greater than the critical value.</p>
+<p>The summary() method prints the violations matrix. If an entry of this matrix is FALSE, the laboratory reports outlying results for the corresponding material at the specified significance level.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">k</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Number of laboratories:  8</span></span>
+<span><span class="co">#&gt; Number of materials:  5</span></span>
+<span><span class="co">#&gt; Number of replicate:  3</span></span>
+<span><span class="co">#&gt; Critical value:  2.06084</span></span>
+<span><span class="co">#&gt; Beyond limits of control: </span></span>
+<span><span class="co">#&gt;         A    B     C    D     E</span></span>
+<span><span class="co">#&gt; Lab1 TRUE TRUE  TRUE TRUE  TRUE</span></span>
+<span><span class="co">#&gt; Lab2 TRUE TRUE  TRUE TRUE FALSE</span></span>
+<span><span class="co">#&gt; Lab3 TRUE TRUE  TRUE TRUE  TRUE</span></span>
+<span><span class="co">#&gt; Lab4 TRUE TRUE FALSE TRUE  TRUE</span></span>
+<span><span class="co">#&gt; Lab5 TRUE TRUE  TRUE TRUE  TRUE</span></span>
+<span><span class="co">#&gt; Lab6 TRUE TRUE  TRUE TRUE  TRUE</span></span>
+<span><span class="co">#&gt; Lab7 TRUE TRUE  TRUE TRUE  TRUE</span></span>
+<span><span class="co">#&gt; Lab8 TRUE TRUE  TRUE TRUE  TRUE</span></span></code></pre></div>
+<p>The Cochran’s test can be performed with the cochran.test() function. In this case study, with the maximum variance for each material, no laboratory was considered inconsistent, since the critical value was 0.52 and the p-values for each material exceeded the 5% significance level.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/ILS/man/cochran.test.html" class="external-link">cochran.test</a></span><span class="op">(</span><span class="va">qcdata</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Test Cochran </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Critical value: 0.5156875 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Alpha test: 0.00625 </span></span>
+<span><span class="co">#&gt;   Smax Material          C p.value</span></span>
+<span><span class="co">#&gt; 1 Lab4        A 0.20033869  0.0231</span></span>
+<span><span class="co">#&gt; 2 Lab4        B 0.15447962  0.0102</span></span>
+<span><span class="co">#&gt; 3 Lab4        C 0.10935197  0.0029</span></span>
+<span><span class="co">#&gt; 4 Lab2        D 0.08493741  0.0010</span></span>
+<span><span class="co">#&gt; 5 Lab2        E 0.07416440  0.0005</span></span></code></pre></div>
+<p>We proceeded to use the methods h.qcs() and plot() to estimate and plot the h statistics for each laboratory and material. The critical value was 2.15, therefore, from this result it can be seen in Figure 6 that laboratories 4, 7 and 8 presented non-consistent results at a significance level of α = 0.005.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">h</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ILS/man/h.qcs.html" class="external-link">h.qcs</a></span><span class="op">(</span><span class="va">qcdata</span>, alpha <span class="op">=</span> <span class="fl">0.005</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">h</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-example_7-1.png" width="100%"></p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">h</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Number of laboratories:  8</span></span>
+<span><span class="co">#&gt; Number of materials:  5</span></span>
+<span><span class="co">#&gt; Number of replicate:  3</span></span>
+<span><span class="co">#&gt; Critical value:  2.152492</span></span>
+<span><span class="co">#&gt; Beyond limits of control: </span></span>
+<span><span class="co">#&gt;         A    B     C     D    E</span></span>
+<span><span class="co">#&gt; Lab1 TRUE TRUE  TRUE  TRUE TRUE</span></span>
+<span><span class="co">#&gt; Lab2 TRUE TRUE  TRUE  TRUE TRUE</span></span>
+<span><span class="co">#&gt; Lab3 TRUE TRUE  TRUE  TRUE TRUE</span></span>
+<span><span class="co">#&gt; Lab4 TRUE TRUE FALSE  TRUE TRUE</span></span>
+<span><span class="co">#&gt; Lab5 TRUE TRUE  TRUE  TRUE TRUE</span></span>
+<span><span class="co">#&gt; Lab6 TRUE TRUE  TRUE  TRUE TRUE</span></span>
+<span><span class="co">#&gt; Lab7 TRUE TRUE  TRUE FALSE TRUE</span></span>
+<span><span class="co">#&gt; Lab8 TRUE TRUE  TRUE FALSE TRUE</span></span></code></pre></div>
+<ul><li><strong>Outliers detection</strong></li></ul>
+<p>laboratories with very extreme results were detected by using the Grubbs’ test, i.e. laboratories defined by very large or small results (glucose content).</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/ILS/man/grubbs.test.html" class="external-link">grubbs.test</a></span><span class="op">(</span><span class="va">qcdata</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Test Grubbs </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Critical value: 1.154478 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Alpha test: 0.00625 </span></span>
+<span><span class="co">#&gt;   Material Gmax    G.max p.value.max Gmin    G.min p.value.min</span></span>
+<span><span class="co">#&gt; 1        A Lab8 1.909229      0.0489 Lab7 1.915242      0.0485</span></span>
+<span><span class="co">#&gt; 2        B Lab4 1.564273      0.0809 Lab1 1.490219      0.0899</span></span>
+<span><span class="co">#&gt; 3        C Lab4 2.984235      0.0102 Lab7 1.387137      0.1040</span></span>
+<span><span class="co">#&gt; 4        D Lab8 2.388179      0.0241 Lab7 2.423819      0.0229</span></span>
+<span><span class="co">#&gt; 5        E Lab2 1.576391      0.0795 Lab7 1.551749      0.0823</span></span></code></pre></div>
+<p>Once the outlier laboratories are removed, one-way ANOVA analysis and mean comparison test can be performed [1]. The ILS package provides function ils.aov() to perform an analysis of variance considering random or fixed effects of the laboratory factor depending on the value of the random argument. By setting this parameter to TRUE, a random effects one-way ANOVA is done for each material, providing the corresponding F tests and confidence intervals for the variances. For instance, the following code shows an example using the results of one material for the sake of simplicity.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Glucose2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">Glucose</span>, <span class="va">Material</span> <span class="op">==</span> <span class="st">"A"</span><span class="op">)</span></span>
+<span><span class="va">Glucose2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ILS/man/lab.qcdata.html" class="external-link">lab.qcdata</a></span><span class="op">(</span><span class="va">Glucose2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/ILS/man/lab.aov.html" class="external-link">lab.aov</a></span><span class="op">(</span><span class="va">Glucose2</span>, random <span class="op">=</span> <span class="cn">TRUE</span>, level <span class="op">=</span> <span class="fl">0.95</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  AOV of Material: 1            Df Sum Sq Mean Sq F value Pr(&gt;F)</span></span>
+<span><span class="co">#&gt; laboratory   7  7.715   1.102   0.975  0.482</span></span>
+<span><span class="co">#&gt; Residuals   16 18.087   1.130</span></span>
+<span><span class="co">#&gt; Warning in RET$pfunction("adjusted", ...): Completion with error &gt; abseps</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   Simultaneous Tests for General Linear Hypotheses</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Multiple Comparisons of Means: Tukey Contrasts</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Fit: aov(formula = y ~ laboratory, data = data)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Linear Hypotheses:</span></span>
+<span><span class="co">#&gt;                   Estimate Std. Error t value Pr(&gt;|t|)</span></span>
+<span><span class="co">#&gt; Lab2 - Lab1 == 0  0.156667   0.868119   0.180    1.000</span></span>
+<span><span class="co">#&gt; Lab3 - Lab1 == 0  0.166667   0.868119   0.192    1.000</span></span>
+<span><span class="co">#&gt; Lab4 - Lab1 == 0  0.173333   0.868119   0.200    1.000</span></span>
+<span><span class="co">#&gt; Lab5 - Lab1 == 0  0.180000   0.868119   0.207    1.000</span></span>
+<span><span class="co">#&gt; Lab6 - Lab1 == 0  0.736667   0.868119   0.849    0.987</span></span>
+<span><span class="co">#&gt; Lab7 - Lab1 == 0 -0.826667   0.868119  -0.952    0.975</span></span>
+<span><span class="co">#&gt; Lab8 - Lab1 == 0  1.293333   0.868119   1.490    0.802</span></span>
+<span><span class="co">#&gt; Lab3 - Lab2 == 0  0.010000   0.868119   0.012    1.000</span></span>
+<span><span class="co">#&gt; Lab4 - Lab2 == 0  0.016667   0.868119   0.019    1.000</span></span>
+<span><span class="co">#&gt; Lab5 - Lab2 == 0  0.023333   0.868119   0.027    1.000</span></span>
+<span><span class="co">#&gt; Lab6 - Lab2 == 0  0.580000   0.868119   0.668    0.997</span></span>
+<span><span class="co">#&gt; Lab7 - Lab2 == 0 -0.983333   0.868119  -1.133    0.940</span></span>
+<span><span class="co">#&gt; Lab8 - Lab2 == 0  1.136667   0.868119   1.309    0.883</span></span>
+<span><span class="co">#&gt; Lab4 - Lab3 == 0  0.006667   0.868119   0.008    1.000</span></span>
+<span><span class="co">#&gt; Lab5 - Lab3 == 0  0.013333   0.868119   0.015    1.000</span></span>
+<span><span class="co">#&gt; Lab6 - Lab3 == 0  0.570000   0.868119   0.657    0.997</span></span>
+<span><span class="co">#&gt; Lab7 - Lab3 == 0 -0.993333   0.868119  -1.144    0.937</span></span>
+<span><span class="co">#&gt; Lab8 - Lab3 == 0  1.126667   0.868119   1.298    0.887</span></span>
+<span><span class="co">#&gt; Lab5 - Lab4 == 0  0.006667   0.868119   0.008    1.000</span></span>
+<span><span class="co">#&gt; Lab6 - Lab4 == 0  0.563333   0.868119   0.649    0.997</span></span>
+<span><span class="co">#&gt; Lab7 - Lab4 == 0 -1.000000   0.868119  -1.152    0.935</span></span>
+<span><span class="co">#&gt; Lab8 - Lab4 == 0  1.120000   0.868119   1.290    0.890</span></span>
+<span><span class="co">#&gt; Lab6 - Lab5 == 0  0.556667   0.868119   0.641    0.998</span></span>
+<span><span class="co">#&gt; Lab7 - Lab5 == 0 -1.006667   0.868119  -1.160    0.932</span></span>
+<span><span class="co">#&gt; Lab8 - Lab5 == 0  1.113333   0.868119   1.282    0.893</span></span>
+<span><span class="co">#&gt; Lab7 - Lab6 == 0 -1.563333   0.868119  -1.801    0.628</span></span>
+<span><span class="co">#&gt; Lab8 - Lab6 == 0  0.556667   0.868119   0.641    0.998</span></span>
+<span><span class="co">#&gt; Lab8 - Lab7 == 0  2.120000   0.868119   2.442    0.286</span></span>
+<span><span class="co">#&gt; (Adjusted p values reported -- single-step method)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   Simultaneous Confidence Intervals</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Multiple Comparisons of Means: Tukey Contrasts</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Fit: aov(formula = y ~ laboratory, data = data)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Quantile = 3.4626</span></span>
+<span><span class="co">#&gt; 95% family-wise confidence level</span></span>
+<span><span class="co">#&gt;  </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Linear Hypotheses:</span></span>
+<span><span class="co">#&gt;                  Estimate  lwr       upr      </span></span>
+<span><span class="co">#&gt; Lab2 - Lab1 == 0  0.156667 -2.849317  3.162651</span></span>
+<span><span class="co">#&gt; Lab3 - Lab1 == 0  0.166667 -2.839317  3.172651</span></span>
+<span><span class="co">#&gt; Lab4 - Lab1 == 0  0.173333 -2.832651  3.179317</span></span>
+<span><span class="co">#&gt; Lab5 - Lab1 == 0  0.180000 -2.825984  3.185984</span></span>
+<span><span class="co">#&gt; Lab6 - Lab1 == 0  0.736667 -2.269317  3.742651</span></span>
+<span><span class="co">#&gt; Lab7 - Lab1 == 0 -0.826667 -3.832651  2.179317</span></span>
+<span><span class="co">#&gt; Lab8 - Lab1 == 0  1.293333 -1.712651  4.299317</span></span>
+<span><span class="co">#&gt; Lab3 - Lab2 == 0  0.010000 -2.995984  3.015984</span></span>
+<span><span class="co">#&gt; Lab4 - Lab2 == 0  0.016667 -2.989317  3.022651</span></span>
+<span><span class="co">#&gt; Lab5 - Lab2 == 0  0.023333 -2.982651  3.029317</span></span>
+<span><span class="co">#&gt; Lab6 - Lab2 == 0  0.580000 -2.425984  3.585984</span></span>
+<span><span class="co">#&gt; Lab7 - Lab2 == 0 -0.983333 -3.989317  2.022651</span></span>
+<span><span class="co">#&gt; Lab8 - Lab2 == 0  1.136667 -1.869317  4.142651</span></span>
+<span><span class="co">#&gt; Lab4 - Lab3 == 0  0.006667 -2.999317  3.012651</span></span>
+<span><span class="co">#&gt; Lab5 - Lab3 == 0  0.013333 -2.992651  3.019317</span></span>
+<span><span class="co">#&gt; Lab6 - Lab3 == 0  0.570000 -2.435984  3.575984</span></span>
+<span><span class="co">#&gt; Lab7 - Lab3 == 0 -0.993333 -3.999317  2.012651</span></span>
+<span><span class="co">#&gt; Lab8 - Lab3 == 0  1.126667 -1.879317  4.132651</span></span>
+<span><span class="co">#&gt; Lab5 - Lab4 == 0  0.006667 -2.999317  3.012651</span></span>
+<span><span class="co">#&gt; Lab6 - Lab4 == 0  0.563333 -2.442651  3.569317</span></span>
+<span><span class="co">#&gt; Lab7 - Lab4 == 0 -1.000000 -4.005984  2.005984</span></span>
+<span><span class="co">#&gt; Lab8 - Lab4 == 0  1.120000 -1.885984  4.125984</span></span>
+<span><span class="co">#&gt; Lab6 - Lab5 == 0  0.556667 -2.449317  3.562651</span></span>
+<span><span class="co">#&gt; Lab7 - Lab5 == 0 -1.006667 -4.012651  1.999317</span></span>
+<span><span class="co">#&gt; Lab8 - Lab5 == 0  1.113333 -1.892651  4.119317</span></span>
+<span><span class="co">#&gt; Lab7 - Lab6 == 0 -1.563333 -4.569317  1.442651</span></span>
+<span><span class="co">#&gt; Lab8 - Lab6 == 0  0.556667 -2.449317  3.562651</span></span>
+<span><span class="co">#&gt; Lab8 - Lab7 == 0  2.120000 -0.885984  5.125984</span></span>
+<span><span class="co">#&gt; $Models</span></span>
+<span><span class="co">#&gt; $Models$`Material: A`</span></span>
+<span><span class="co">#&gt; Call:</span></span>
+<span><span class="co">#&gt;    aov(formula = y ~ laboratory, data = data)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Terms:</span></span>
+<span><span class="co">#&gt;                 laboratory Residuals</span></span>
+<span><span class="co">#&gt; Sum of Squares     7.71520  18.08713</span></span>
+<span><span class="co">#&gt; Deg. of Freedom          7        16</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Residual standard error: 1.063224</span></span>
+<span><span class="co">#&gt; Estimated effects may be unbalanced</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $Confidence</span></span>
+<span><span class="co">#&gt; $Confidence$`Material: A`</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   Simultaneous Confidence Intervals</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Multiple Comparisons of Means: Tukey Contrasts</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Fit: aov(formula = y ~ laboratory, data = data)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Quantile = 3.4626</span></span>
+<span><span class="co">#&gt; 95% family-wise confidence level</span></span>
+<span><span class="co">#&gt;  </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Linear Hypotheses:</span></span>
+<span><span class="co">#&gt;                  Estimate  lwr       upr      </span></span>
+<span><span class="co">#&gt; Lab2 - Lab1 == 0  0.156667 -2.849317  3.162651</span></span>
+<span><span class="co">#&gt; Lab3 - Lab1 == 0  0.166667 -2.839317  3.172651</span></span>
+<span><span class="co">#&gt; Lab4 - Lab1 == 0  0.173333 -2.832651  3.179317</span></span>
+<span><span class="co">#&gt; Lab5 - Lab1 == 0  0.180000 -2.825984  3.185984</span></span>
+<span><span class="co">#&gt; Lab6 - Lab1 == 0  0.736667 -2.269317  3.742651</span></span>
+<span><span class="co">#&gt; Lab7 - Lab1 == 0 -0.826667 -3.832651  2.179317</span></span>
+<span><span class="co">#&gt; Lab8 - Lab1 == 0  1.293333 -1.712651  4.299317</span></span>
+<span><span class="co">#&gt; Lab3 - Lab2 == 0  0.010000 -2.995984  3.015984</span></span>
+<span><span class="co">#&gt; Lab4 - Lab2 == 0  0.016667 -2.989317  3.022651</span></span>
+<span><span class="co">#&gt; Lab5 - Lab2 == 0  0.023333 -2.982651  3.029317</span></span>
+<span><span class="co">#&gt; Lab6 - Lab2 == 0  0.580000 -2.425984  3.585984</span></span>
+<span><span class="co">#&gt; Lab7 - Lab2 == 0 -0.983333 -3.989317  2.022651</span></span>
+<span><span class="co">#&gt; Lab8 - Lab2 == 0  1.136667 -1.869317  4.142651</span></span>
+<span><span class="co">#&gt; Lab4 - Lab3 == 0  0.006667 -2.999317  3.012651</span></span>
+<span><span class="co">#&gt; Lab5 - Lab3 == 0  0.013333 -2.992651  3.019317</span></span>
+<span><span class="co">#&gt; Lab6 - Lab3 == 0  0.570000 -2.435984  3.575984</span></span>
+<span><span class="co">#&gt; Lab7 - Lab3 == 0 -0.993333 -3.999317  2.012651</span></span>
+<span><span class="co">#&gt; Lab8 - Lab3 == 0  1.126667 -1.879317  4.132651</span></span>
+<span><span class="co">#&gt; Lab5 - Lab4 == 0  0.006667 -2.999317  3.012651</span></span>
+<span><span class="co">#&gt; Lab6 - Lab4 == 0  0.563333 -2.442651  3.569317</span></span>
+<span><span class="co">#&gt; Lab7 - Lab4 == 0 -1.000000 -4.005984  2.005984</span></span>
+<span><span class="co">#&gt; Lab8 - Lab4 == 0  1.120000 -1.885984  4.125984</span></span>
+<span><span class="co">#&gt; Lab6 - Lab5 == 0  0.556667 -2.449317  3.562651</span></span>
+<span><span class="co">#&gt; Lab7 - Lab5 == 0 -1.006667 -4.012651  1.999317</span></span>
+<span><span class="co">#&gt; Lab8 - Lab5 == 0  1.113333 -1.892651  4.119317</span></span>
+<span><span class="co">#&gt; Lab7 - Lab6 == 0 -1.563333 -4.569317  1.442651</span></span>
+<span><span class="co">#&gt; Lab8 - Lab6 == 0  0.556667 -2.449317  3.562651</span></span>
+<span><span class="co">#&gt; Lab8 - Lab7 == 0  2.120000 -0.885984  5.125984</span></span></code></pre></div>
+<p><br><br></p>
+</div>
+<div class="section level2">
+<h2 id="2-characterization-of-materials-by-thermogravimetric-analysis">2) Characterization of materials by thermogravimetric analysis<a class="anchor" aria-label="anchor" href="#2-characterization-of-materials-by-thermogravimetric-analysis"></a>
+</h2>
+<ul><li><strong>Graphical and analytical statistics</strong></li></ul>
 </div>
 </div>
   </div>
