@@ -6,10 +6,30 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The aim of the ILS package is to detect laboratories that provide not
-consistent results, working simultaneously with different test
-materials, from the perspective of the Univariate Data Analysis and the
-Functional Data Analysis (FDA).
+## Overview
+
+The main objective of the ILS package is to detect laboratories that
+provide not consistent results, working simultaneously with different
+test materials, from the perspective of the Univariate Data Analysis and
+the Functional Data Analysis (FDA).
+
+The ILS package can identify laboratories that provide significantly
+different results through the estimation the Mandel’s h and k scalar
+statistics, based on the ASTM E691 and ISO 5725-2 standards.
+Additionally, the package has implemented tools to assess the presence
+of outliers using the Cochran and Grubbs tests.
+
+Furthermore, Analysis of Variance (ANOVA) techniques are provided, both
+for the cases of fixed and random effects, including confidence
+intervals for the principles parameters.
+
+On the other hand, One of the novelties of this package is the
+incorporation of tools to perform an ILS from a functional data analysis
+approach. Accordingly, the functional nature of the data obtained by
+experimental techniques corresponding to analytical chemistry, applied
+physics and engineering applications (spectra, thermograms, and sensor
+signals, among others) is taking into account by implementing the
+functional extensions of Mandel’s h and k statistics.
 
 ## Installation
 
@@ -17,9 +37,27 @@ You can install the development version of ILSR6V1 from
 [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("pak")
-pak::pak("davidtorres1818/ILSR6V1")
+# install.packages("ILSR6V1")
+library("davidtorres1818/ILSR6V1")
 ```
+
+## Concepts across the board
+
+**ILS package** addresses several concepts and approaches which will be
+discussed in detail in the later sections of this article. The most
+relevant concepts can be found below:
+
+-   **An Interlaboratory Study (ILS)**:
+
+    kasñaññsa
+
+-   **R6-based design**: uses R6 classes for flexibility and
+    performance.
+
+-   **Interactive graphics**: modern visualizations with **ggplot2** and
+    **plotly**.
+
+-   **tidyverse integration**: easy data manipulation and visualization.
 
 ## Example
 
