@@ -38,7 +38,7 @@ You can install the development version of ILSR6V1 from
 
 ``` r
 # install.packages("ILSR6V1")
-library("davidtorres1818/ILSR6V1")
+library("ILSR6V1")
 ```
 
 ## Concepts across the board
@@ -47,9 +47,20 @@ library("davidtorres1818/ILSR6V1")
 discussed in detail in the later sections of this article. The most
 relevant concepts can be found below:
 
--   **An Interlaboratory Study (ILS)**:
+-   **Interlaboratory Study (ILS)**:
 
-    kasñaññsa
+    This concept can be defined as a control procedure to evaluate the
+    performance of a group of laboratories through a collaborative
+    trials. In an Interlaboratory Study, an adequate number of
+    laboratories are chosen to participate in the experiment with the
+    aim of analyzing the samples and obtain results.
+
+    Participating laboratories receive samples (previously homogenized
+    or to be homogenized by the laboratories) for analysis, then, the
+    measurements results of the laboratories are evaluated according to
+    the degree of data variability. Some of the most common factors that
+    may be a cause of variability are: the equipment of laboratories,
+    operators, materials, temperature and humidity, among others.
 
 -   **R6-based design**: uses R6 classes for flexibility and
     performance.
