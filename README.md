@@ -49,24 +49,25 @@ relevant concepts can be found below:
 
 -   **Interlaboratory Study (ILS)**:
 
-# `{r , echo=FALSE, fig.align="center", fig.width=10, message=FALSE, warning=FALSE} #   library(png) #   library(grid) #   img <- readPNG("ILS_Overview.PNG") #   grid.raster(img) #`
+    This concept can be defined as a control procedure to evaluate the
+    performance of a group of laboratories through a collaborative
+    trials. In an Interlaboratory Study, an adequate number of
+    laboratories are chosen to participate in the experiment with the
+    aim of analyzing the samples and obtain results.
 
-    This concept can be defined as a control procedure to
-    evaluate the performance of a group of laboratories through a collaborative
-    trials. In an Interlaboratory Study, an adequate number of laboratories are
-    chosen to participate in the experiment with the aim of analyzing the samples
-    and obtain results.
-
-    Participating laboratories receive samples (previously homogenized or to be
-    homogenized by the laboratories) for analysis, then, the measurements results of
-    the laboratories are evaluated according to the degree of data variability. Some
-    of the most common factors that may be a cause of variability are: the equipment
-    of laboratories, operators, materials, temperature and humidity, among others.
+    Participating laboratories receive samples (previously homogenized
+    or to be homogenized by the laboratories) for analysis, then, the
+    measurements results of the laboratories are evaluated according to
+    the degree of data variability. Some of the most common factors that
+    may be a cause of variability are: the equipment of laboratories,
+    operators, materials, temperature and humidity, among others.
 
 -   **R6-based design**: uses R6 classes for flexibility and
     performance.
+
 -   **Interactive graphics**: modern visualizations with **ggplot2** and
     **plotly**.
+
 -   **tidyverse integration**: easy data manipulation and visualization.
 
 ## Example

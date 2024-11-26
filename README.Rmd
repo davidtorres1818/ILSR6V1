@@ -58,13 +58,6 @@ found below:
 
 -   **Interlaboratory Study (ILS)**:
 
-# ```{r , echo=FALSE, fig.align="center", fig.width=10, message=FALSE, warning=FALSE}
-#   library(png)
-#   library(grid)
-#   img <- readPNG("ILS_Overview.PNG")
-#   grid.raster(img)
-# ```
-
     This concept can be defined as a control procedure to
     evaluate the performance of a group of laboratories through a collaborative
     trials. In an Interlaboratory Study, an adequate number of laboratories are
