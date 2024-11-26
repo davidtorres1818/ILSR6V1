@@ -277,6 +277,8 @@ library("ILSR6V1")
 
 ## 1) Clinical study of blood glucose measurement
 
+-   **Graphical and analytical statistics**
+
 The Glucose dataset corresponds to the serum glucose test (measurements
 of the concentration of glucose in the blood used to control the diabetes). In this
 study, eight laboratories where involved, and five different tests were performed
@@ -324,22 +326,124 @@ is more variability between the results for each laboratory from material C to
 material E.
 
 <br>
+
+In order to calculate the graphical and analytical statistics for the scalar
+(univariate) case, first, the function lab.qcs() (quality control statistics) has to
+be used. This function returns the estimates of the statistical required measures
+(mean, variance, etc.) for computing the Mandel’s h and k statistics, as well as
+the required measures to perform the Cochran and Grubbs tests.
+
+In the following commands, the lab.qcs() function uses the qcdata object
+to create the qcstat object that estimates both the mean and the global deviation
+ from the results of all laboratories and all materials. The repeatability
+deviation (Sr), the deviation between the means of laboratories (SB), and the
+reproducibility deviation (SR) for each material are also estimated (following
+ASTM E-691)
+
+```{r example_3}
+qcstat <- lab.qcs(qcdata)
+summary(qcstat)
+
+plot(qcstat,
+     xlab = "Deviations",
+     ylab = "Material")
+```
+
+In the figure presented,, the values of S (the global deviation of all laboratories), Sr
+(the repeatability’s deviation), SR (reproducibility’s deviation) and SB (the
+deviation between the means of the laboratories) are shown for each material.
+A greater variability can be noted from material C to material E. Materials C
+and D have a greater variability between the results of the laboratories (SR)
+and within them (Sr).
+
+<br>
+
+-   **Consistency tests**
+
+First, an analysis of the variability for
+each laboratory will be performed. For this purpose, the k statistic (k.qcs())
+and the Cochran test (cochran.test()) will be used to identify if there is any
+laboratory with non-consistent results. Subsequently, the h statistic (h.qcs())
+and the Grubbs test (grubbs.test()) will be used to perform an analysis to
+evaluate inter-laboratory variability.
+
+The following code creates an object containing the scalar Mandel’s k statistic
+for each laboratory and material, which is subsequently plotted:
+
+```{r example_4}
+k <- k.qcs(qcdata, alpha = 0.005)
+plot(k)
+```
+
+<br>
+<br>
+<br>
+
+In the figure above, the dotted line represents the critical value equal to 2.06,
+obtained for p = 8, n = 15 and α = 0.005 (following the ASTM standard). Hence,
+outliers were detected for the laboratory 2, when testing the material 5, and for
+material 3, when is tested by the laboratory 4, since the corresponding values
+of the k statistics were greater than the critical value.
+
+
+The summary() method prints the violations matrix. If an entry of this matrix
+is FALSE, the laboratory reports outlying results for the corresponding material
+at the specified significance level.
+
+```{r example_5}
+summary(k)
+```
+
+The Cochran’s test can be performed with the cochran.test() function.
+In this case study, with the maximum variance for each material, no laboratory
+was considered inconsistent, since the critical value was 0.52 and the p-values
+for each material exceeded the 5% significance level.
+
+```{r example_6}
+cochran.test(qcdata)
+```
+
+We proceeded to use the methods h.qcs() and plot() to estimate and plot
+the h statistics for each laboratory and material. The critical value was 2.15,
+therefore, from this result it can be seen in Figure 6 that laboratories 4, 7 and
+8 presented non-consistent results at a significance level of α = 0.005.
+
+```{r example_7}
+h <- h.qcs(qcdata, alpha = 0.005)
+plot(h)
+
+summary(h)
+```
+
+
+-   **Outliers detection**
+
+ laboratories with very extreme results were detected by using the
+Grubbs’ test, i.e. laboratories defined by very large or small results (glucose
+content).
+
+```{r example_8}
+grubbs.test(qcdata)
+```
+
+Once the outlier laboratories are removed, one-way ANOVA analysis and
+mean comparison test can be performed [1]. The ILS package provides function
+ils.aov() to perform an analysis of variance considering random or fixed effects
+of the laboratory factor depending on the value of the random argument. By
+setting this parameter to TRUE, a random effects one-way ANOVA is done for
+each material, providing the corresponding F tests and confidence intervals for
+the variances. For instance, the following code shows an example using the
+results of one material for the sake of simplicity.
+
+```{r example_9}
+Glucose2 <- subset(Glucose, Material == "A")
+Glucose2 <- lab.qcdata(Glucose2)
+lab.aov(Glucose2, random = TRUE, level = 0.95)
+```
+
 <br>
 <br>
 
+## 2) Characterization of materials by thermogravimetric analysis
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
-
-```{r cars}
-summary(cars)
-```
-
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this.
-
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
-```
-
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
+-   **Graphical and analytical statistics**

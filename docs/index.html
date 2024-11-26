@@ -121,15 +121,6 @@
 <p><br></p>
 </div>
 <div class="section level2">
-<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
-</h2>
-<p>You can install the development version of ILSR6V1 from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("ILSR6V1")</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/davidtorres1818/ILSR6V1" class="external-link">"ILSR6V1"</a></span><span class="op">)</span></span></code></pre></div>
-<p><br></p>
-</div>
-<div class="section level2">
 <h2 id="concepts-across-the-board">Concepts across the board<a class="anchor" aria-label="anchor" href="#concepts-across-the-board"></a>
 </h2>
 <p><strong>ILS package</strong> addresses several concepts and approaches which will be discussed in detail in the later sections of this article. The most relevant concepts can be found below:</p>
@@ -225,13 +216,50 @@
 <p>The test statistic is dK.</p>
 </li></ul>
 <p>A bootstrap procedure to reproduce the distribution of these statistics under the corresponding null hypothesis is proposed in… This procedure provides the approximation of the critical values cK and cH of the test statistics dH and dK, respectively. Additionally, confidence bands for the functional statistics H(t) and K(t) can be computed (determined by the envelope of their bootstrap counterparts with a norm less than the corresponding critical value).</p>
-<p><br><br><br></p>
-<p>This is a basic example which shows you how to solve a common problem:</p>
+<p><br></p>
+</div>
+<div class="section level2">
+<h2 id="ils-package-installation">ILS package Installation<a class="anchor" aria-label="anchor" href="#ils-package-installation"></a>
+</h2>
+<p>You can install the development version of ILSR6V1 from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install.packages("ILSR6V1")</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/davidtorres1818/ILSR6V1" class="external-link">"ILSR6V1"</a></span><span class="op">)</span></span></code></pre></div>
+<p><br></p>
+</div>
+<div class="section level2"><h2 id="ils-package-practical-examples">ILS package Practical examples<a class="anchor" aria-label="anchor" href="#ils-package-practical-examples"></a>
+</h2></div>
+<div class="section level2">
+<h2 id="1-clinical-study-of-blood-glucose-measurement">1) Clinical study of blood glucose measurement<a class="anchor" aria-label="anchor" href="#1-clinical-study-of-blood-glucose-measurement"></a>
+</h2>
+<p>The Glucose dataset corresponds to the serum glucose test (measurements of the concentration of glucose in the blood used to control the diabetes). In this study, eight laboratories where involved, and five different tests were performed on blood samples labelled with different references, ranging from a low sugar content to a very high one. Three replicates were obtained for each sample.</p>
+<p>Each of these laboratories measured five different concentration levels (A, B, C, D, E) of a given material, and at each of these levels, three measurements were taken (3 replicates). Each laboratory provided a total of 15 measurements (3 for each level), therefore, with 8 laboratories involved, 120 measurements were obtained.</p>
+<p>In order to access this dataset, the ILS package installing and loading is required. Once loading is performed, the Glucose data.frame object is called using the following instructions.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/davidtorres1818/ILSR6V1" class="external-link">ILSR6V1</a></span><span class="op">)</span></span>
-<span><span class="co">## basic example code</span></span></code></pre></div>
-<p>What is special about using <code>README.Rmd</code> instead of just <code>README.md</code>? You can include R chunks like so:</p>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mflores72000/ILS/" class="external-link">ILS</a></span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"Glucose"</span><span class="op">)</span></span></code></pre></div>
+<p>The first step to perform an analysis with the ILS package consist on using the function ils.qcdata() (quality control data) that receives a data.frame as an argument. By default, the first column of the data frame must contain the response variable, the second column the replicates, the third column corresponds to the tested material, while the fourth column includes the laboratories where the procedure was performed.</p>
+<p>For instance, the following code creates an object qcdata (of class ils.qcdata) and uses the summary() method to obtain descriptive statistics information of the dataset.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">qcdata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ILS/man/lab.qcdata.html" class="external-link">lab.qcdata</a></span><span class="op">(</span><span class="va">Glucose</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">qcdata</span><span class="op">)</span></span>
+<span><span class="co">#&gt;        x          replicate material   laboratory</span></span>
+<span><span class="co">#&gt;  Min.   : 39.02   1:40      A:24     Lab1   :15  </span></span>
+<span><span class="co">#&gt;  1st Qu.: 78.45   2:40      B:24     Lab2   :15  </span></span>
+<span><span class="co">#&gt;  Median :135.03   3:40      C:24     Lab3   :15  </span></span>
+<span><span class="co">#&gt;  Mean   :149.09             D:24     Lab4   :15  </span></span>
+<span><span class="co">#&gt;  3rd Qu.:196.66             E:24     Lab5   :15  </span></span>
+<span><span class="co">#&gt;  Max.   :309.40                      Lab6   :15  </span></span>
+<span><span class="co">#&gt;                                      (Other):30</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">qcdata</span>,</span>
+<span>     ylab <span class="op">=</span> <span class="st">"Laboratory"</span>,</span>
+<span>     xlab <span class="op">=</span> <span class="st">"Glucose concentration in blood"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-example_2-1.png" width="100%"></p>
+<p>The figure shows the obtained values for each laboratory and material. It can be noted that the blood glucose level increases from material A to D and there is more variability between the results for each laboratory from material C to material E.</p>
+<p><br><br><br></p>
+<p>What is special about using <code>README.Rmd</code> instead of just <code>README.md</code>? You can include R chunks like so:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">cars</span><span class="op">)</span></span>
 <span><span class="co">#&gt;      speed           dist       </span></span>
 <span><span class="co">#&gt;  Min.   : 4.0   Min.   :  2.00  </span></span>

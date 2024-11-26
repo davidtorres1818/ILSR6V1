@@ -289,6 +289,8 @@ library("ILSR6V1")
 
 ## 1) Clinical study of blood glucose measurement
 
+-   **Graphical and analytical statistics**
+
 The Glucose dataset corresponds to the serum glucose test (measurements
 of the concentration of glucose in the blood used to control the
 diabetes). In this study, eight laboratories where involved, and five
@@ -347,28 +349,366 @@ It can be noted that the blood glucose level increases from material A
 to D and there is more variability between the results for each
 laboratory from material C to material E.
 
-<br> <br> <br>
+<br>
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+In order to calculate the graphical and analytical statistics for the
+scalar (univariate) case, first, the function lab.qcs() (quality control
+statistics) has to be used. This function returns the estimates of the
+statistical required measures (mean, variance, etc.) for computing the
+Mandel’s h and k statistics, as well as the required measures to perform
+the Cochran and Grubbs tests.
+
+In the following commands, the lab.qcs() function uses the qcdata object
+to create the qcstat object that estimates both the mean and the global
+deviation from the results of all laboratories and all materials. The
+repeatability deviation (Sr), the deviation between the means of
+laboratories (SB), and the reproducibility deviation (SR) for each
+material are also estimated (following ASTM E-691)
 
 ``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
+qcstat <- lab.qcs(qcdata)
+summary(qcstat)
+#> 
+#> Number of laboratories:  8
+#> Number of materials:  5
+#> Number of replicate:  3
+#> Summary for Laboratory (means):
+#>        Lab1      Lab2      Lab3      Lab4      Lab5      Lab6      Lab7
+#> A  41.28333  41.44000  41.45000  41.45667  41.46333  42.02000  40.45667
+#> B  78.31667  79.23333  79.90333  80.96333  78.69000  79.89333  79.51667
+#> C 133.19667 135.40667 134.59000 140.83000 133.26667 136.61667 132.49333
+#> D 193.65000 195.10667 192.09000 197.21333 193.05000 197.24333 191.26000
+#> E 293.25333 298.91667 292.67000 295.82000 293.56333 294.95667 290.13667
+#>        Lab8
+#> A  42.57667
+#> B  80.34667
+#> C 134.71000
+#> D 198.12333
+#> E 296.62000
+#> 
+#> Summary for Laboratory (Deviations):
+#>        Lab1      Lab2      Lab3      Lab4      Lab5     Lab6     Lab7      Lab8
+#> A 0.2230097 0.4850773 1.0608016 1.8117763 0.3666515 1.408119 1.247811 0.8224557
+#> B 0.1582193 1.3268509 0.8303212 2.7660863 0.7754354 1.636592 2.059935 0.5064912
+#> C 0.5909597 2.1679791 1.7287857 6.6200227 1.1987215 1.287025 2.124296 1.0343597
+#> D 0.0600000 4.6824068 1.5932043 1.9365519 1.8826311 1.649616 3.817709 2.4637844
+#> E 0.7266590 9.1869055 2.7101107 0.8835723 0.9543759 4.034282 3.304184 1.6479078
+#> 
+#> Summary for Material:
+#>        mean         S      S_r       S_B      S_R
+#> A  41.51833 0.5543251 1.063224 0.6061274 1.058783
+#> B  79.60792 0.8664835 1.496071 0.8627346 1.495481
+#> C 135.13875 1.9071053 2.750879 2.6566872 3.478919
+#> D 194.71708 1.4262962 2.625065 2.5950046 3.365713
+#> E 294.49208 2.8067799 3.934974 2.6931364 4.192334
+
+plot(qcstat,
+     xlab = "Deviations",
+     ylab = "Material")
 ```
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this.
+<img src="man/figures/README-example_3-1.png" width="100%" />
 
-You can also embed plots, for example:
+In the figure presented,, the values of S (the global deviation of all
+laboratories), Sr (the repeatability’s deviation), SR (reproducibility’s
+deviation) and SB (the deviation between the means of the laboratories)
+are shown for each material. A greater variability can be noted from
+material C to material E. Materials C and D have a greater variability
+between the results of the laboratories (SR) and within them (Sr).
 
-<img src="man/figures/README-pressure-1.png" width="100%" />
+<br>
 
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
+-   **Consistency tests**
+
+First, an analysis of the variability for each laboratory will be
+performed. For this purpose, the k statistic (k.qcs()) and the Cochran
+test (cochran.test()) will be used to identify if there is any
+laboratory with non-consistent results. Subsequently, the h statistic
+(h.qcs()) and the Grubbs test (grubbs.test()) will be used to perform an
+analysis to evaluate inter-laboratory variability.
+
+The following code creates an object containing the scalar Mandel’s k
+statistic for each laboratory and material, which is subsequently
+plotted:
+
+``` r
+k <- k.qcs(qcdata, alpha = 0.005)
+plot(k)
+```
+
+<img src="man/figures/README-example_4-1.png" width="100%" />
+
+<br> <br> <br>
+
+In the figure above, the dotted line represents the critical value equal
+to 2.06, obtained for p = 8, n = 15 and α = 0.005 (following the ASTM
+standard). Hence, outliers were detected for the laboratory 2, when
+testing the material 5, and for material 3, when is tested by the
+laboratory 4, since the corresponding values of the k statistics were
+greater than the critical value.
+
+The summary() method prints the violations matrix. If an entry of this
+matrix is FALSE, the laboratory reports outlying results for the
+corresponding material at the specified significance level.
+
+``` r
+summary(k)
+#> 
+#> Number of laboratories:  8
+#> Number of materials:  5
+#> Number of replicate:  3
+#> Critical value:  2.06084
+#> Beyond limits of control: 
+#>         A    B     C    D     E
+#> Lab1 TRUE TRUE  TRUE TRUE  TRUE
+#> Lab2 TRUE TRUE  TRUE TRUE FALSE
+#> Lab3 TRUE TRUE  TRUE TRUE  TRUE
+#> Lab4 TRUE TRUE FALSE TRUE  TRUE
+#> Lab5 TRUE TRUE  TRUE TRUE  TRUE
+#> Lab6 TRUE TRUE  TRUE TRUE  TRUE
+#> Lab7 TRUE TRUE  TRUE TRUE  TRUE
+#> Lab8 TRUE TRUE  TRUE TRUE  TRUE
+```
+
+The Cochran’s test can be performed with the cochran.test() function. In
+this case study, with the maximum variance for each material, no
+laboratory was considered inconsistent, since the critical value was
+0.52 and the p-values for each material exceeded the 5% significance
+level.
+
+``` r
+cochran.test(qcdata)
+#> 
+#> Test Cochran 
+#> 
+#>  Critical value: 0.5156875 
+#> 
+#>  Alpha test: 0.00625 
+#>   Smax Material          C p.value
+#> 1 Lab4        A 0.20033869  0.0231
+#> 2 Lab4        B 0.15447962  0.0102
+#> 3 Lab4        C 0.10935197  0.0029
+#> 4 Lab2        D 0.08493741  0.0010
+#> 5 Lab2        E 0.07416440  0.0005
+```
+
+We proceeded to use the methods h.qcs() and plot() to estimate and plot
+the h statistics for each laboratory and material. The critical value
+was 2.15, therefore, from this result it can be seen in Figure 6 that
+laboratories 4, 7 and 8 presented non-consistent results at a
+significance level of α = 0.005.
+
+``` r
+h <- h.qcs(qcdata, alpha = 0.005)
+plot(h)
+```
+
+<img src="man/figures/README-example_7-1.png" width="100%" />
+
+``` r
+summary(h)
+#> 
+#> Number of laboratories:  8
+#> Number of materials:  5
+#> Number of replicate:  3
+#> Critical value:  2.152492
+#> Beyond limits of control: 
+#>         A    B     C     D    E
+#> Lab1 TRUE TRUE  TRUE  TRUE TRUE
+#> Lab2 TRUE TRUE  TRUE  TRUE TRUE
+#> Lab3 TRUE TRUE  TRUE  TRUE TRUE
+#> Lab4 TRUE TRUE FALSE  TRUE TRUE
+#> Lab5 TRUE TRUE  TRUE  TRUE TRUE
+#> Lab6 TRUE TRUE  TRUE  TRUE TRUE
+#> Lab7 TRUE TRUE  TRUE FALSE TRUE
+#> Lab8 TRUE TRUE  TRUE FALSE TRUE
+```
+
+-   **Outliers detection**
+
+laboratories with very extreme results were detected by using the
+Grubbs’ test, i.e. laboratories defined by very large or small results
+(glucose content).
+
+``` r
+grubbs.test(qcdata)
+#> 
+#> Test Grubbs 
+#> 
+#>  Critical value: 1.154478 
+#> 
+#>  Alpha test: 0.00625 
+#>   Material Gmax    G.max p.value.max Gmin    G.min p.value.min
+#> 1        A Lab8 1.909229      0.0489 Lab7 1.915242      0.0485
+#> 2        B Lab4 1.564273      0.0809 Lab1 1.490219      0.0899
+#> 3        C Lab4 2.984235      0.0102 Lab7 1.387137      0.1040
+#> 4        D Lab8 2.388179      0.0241 Lab7 2.423819      0.0229
+#> 5        E Lab2 1.576391      0.0795 Lab7 1.551749      0.0823
+```
+
+Once the outlier laboratories are removed, one-way ANOVA analysis and
+mean comparison test can be performed \[1\]. The ILS package provides
+function ils.aov() to perform an analysis of variance considering random
+or fixed effects of the laboratory factor depending on the value of the
+random argument. By setting this parameter to TRUE, a random effects
+one-way ANOVA is done for each material, providing the corresponding F
+tests and confidence intervals for the variances. For instance, the
+following code shows an example using the results of one material for
+the sake of simplicity.
+
+``` r
+Glucose2 <- subset(Glucose, Material == "A")
+Glucose2 <- lab.qcdata(Glucose2)
+lab.aov(Glucose2, random = TRUE, level = 0.95)
+#> 
+#>  AOV of Material: 1            Df Sum Sq Mean Sq F value Pr(>F)
+#> laboratory   7  7.715   1.102   0.975  0.482
+#> Residuals   16 18.087   1.130
+#> Warning in RET$pfunction("adjusted", ...): Completion with error > abseps
+#> 
+#>   Simultaneous Tests for General Linear Hypotheses
+#> 
+#> Multiple Comparisons of Means: Tukey Contrasts
+#> 
+#> 
+#> Fit: aov(formula = y ~ laboratory, data = data)
+#> 
+#> Linear Hypotheses:
+#>                   Estimate Std. Error t value Pr(>|t|)
+#> Lab2 - Lab1 == 0  0.156667   0.868119   0.180    1.000
+#> Lab3 - Lab1 == 0  0.166667   0.868119   0.192    1.000
+#> Lab4 - Lab1 == 0  0.173333   0.868119   0.200    1.000
+#> Lab5 - Lab1 == 0  0.180000   0.868119   0.207    1.000
+#> Lab6 - Lab1 == 0  0.736667   0.868119   0.849    0.987
+#> Lab7 - Lab1 == 0 -0.826667   0.868119  -0.952    0.975
+#> Lab8 - Lab1 == 0  1.293333   0.868119   1.490    0.802
+#> Lab3 - Lab2 == 0  0.010000   0.868119   0.012    1.000
+#> Lab4 - Lab2 == 0  0.016667   0.868119   0.019    1.000
+#> Lab5 - Lab2 == 0  0.023333   0.868119   0.027    1.000
+#> Lab6 - Lab2 == 0  0.580000   0.868119   0.668    0.997
+#> Lab7 - Lab2 == 0 -0.983333   0.868119  -1.133    0.940
+#> Lab8 - Lab2 == 0  1.136667   0.868119   1.309    0.883
+#> Lab4 - Lab3 == 0  0.006667   0.868119   0.008    1.000
+#> Lab5 - Lab3 == 0  0.013333   0.868119   0.015    1.000
+#> Lab6 - Lab3 == 0  0.570000   0.868119   0.657    0.997
+#> Lab7 - Lab3 == 0 -0.993333   0.868119  -1.144    0.937
+#> Lab8 - Lab3 == 0  1.126667   0.868119   1.298    0.887
+#> Lab5 - Lab4 == 0  0.006667   0.868119   0.008    1.000
+#> Lab6 - Lab4 == 0  0.563333   0.868119   0.649    0.997
+#> Lab7 - Lab4 == 0 -1.000000   0.868119  -1.152    0.935
+#> Lab8 - Lab4 == 0  1.120000   0.868119   1.290    0.890
+#> Lab6 - Lab5 == 0  0.556667   0.868119   0.641    0.998
+#> Lab7 - Lab5 == 0 -1.006667   0.868119  -1.160    0.932
+#> Lab8 - Lab5 == 0  1.113333   0.868119   1.282    0.893
+#> Lab7 - Lab6 == 0 -1.563333   0.868119  -1.801    0.628
+#> Lab8 - Lab6 == 0  0.556667   0.868119   0.641    0.998
+#> Lab8 - Lab7 == 0  2.120000   0.868119   2.442    0.286
+#> (Adjusted p values reported -- single-step method)
+#> 
+#> 
+#>   Simultaneous Confidence Intervals
+#> 
+#> Multiple Comparisons of Means: Tukey Contrasts
+#> 
+#> 
+#> Fit: aov(formula = y ~ laboratory, data = data)
+#> 
+#> Quantile = 3.4626
+#> 95% family-wise confidence level
+#>  
+#> 
+#> Linear Hypotheses:
+#>                  Estimate  lwr       upr      
+#> Lab2 - Lab1 == 0  0.156667 -2.849317  3.162651
+#> Lab3 - Lab1 == 0  0.166667 -2.839317  3.172651
+#> Lab4 - Lab1 == 0  0.173333 -2.832651  3.179317
+#> Lab5 - Lab1 == 0  0.180000 -2.825984  3.185984
+#> Lab6 - Lab1 == 0  0.736667 -2.269317  3.742651
+#> Lab7 - Lab1 == 0 -0.826667 -3.832651  2.179317
+#> Lab8 - Lab1 == 0  1.293333 -1.712651  4.299317
+#> Lab3 - Lab2 == 0  0.010000 -2.995984  3.015984
+#> Lab4 - Lab2 == 0  0.016667 -2.989317  3.022651
+#> Lab5 - Lab2 == 0  0.023333 -2.982651  3.029317
+#> Lab6 - Lab2 == 0  0.580000 -2.425984  3.585984
+#> Lab7 - Lab2 == 0 -0.983333 -3.989317  2.022651
+#> Lab8 - Lab2 == 0  1.136667 -1.869317  4.142651
+#> Lab4 - Lab3 == 0  0.006667 -2.999317  3.012651
+#> Lab5 - Lab3 == 0  0.013333 -2.992651  3.019317
+#> Lab6 - Lab3 == 0  0.570000 -2.435984  3.575984
+#> Lab7 - Lab3 == 0 -0.993333 -3.999317  2.012651
+#> Lab8 - Lab3 == 0  1.126667 -1.879317  4.132651
+#> Lab5 - Lab4 == 0  0.006667 -2.999317  3.012651
+#> Lab6 - Lab4 == 0  0.563333 -2.442651  3.569317
+#> Lab7 - Lab4 == 0 -1.000000 -4.005984  2.005984
+#> Lab8 - Lab4 == 0  1.120000 -1.885984  4.125984
+#> Lab6 - Lab5 == 0  0.556667 -2.449317  3.562651
+#> Lab7 - Lab5 == 0 -1.006667 -4.012651  1.999317
+#> Lab8 - Lab5 == 0  1.113333 -1.892651  4.119317
+#> Lab7 - Lab6 == 0 -1.563333 -4.569317  1.442651
+#> Lab8 - Lab6 == 0  0.556667 -2.449317  3.562651
+#> Lab8 - Lab7 == 0  2.120000 -0.885984  5.125984
+#> $Models
+#> $Models$`Material: A`
+#> Call:
+#>    aov(formula = y ~ laboratory, data = data)
+#> 
+#> Terms:
+#>                 laboratory Residuals
+#> Sum of Squares     7.71520  18.08713
+#> Deg. of Freedom          7        16
+#> 
+#> Residual standard error: 1.063224
+#> Estimated effects may be unbalanced
+#> 
+#> 
+#> $Confidence
+#> $Confidence$`Material: A`
+#> 
+#>   Simultaneous Confidence Intervals
+#> 
+#> Multiple Comparisons of Means: Tukey Contrasts
+#> 
+#> 
+#> Fit: aov(formula = y ~ laboratory, data = data)
+#> 
+#> Quantile = 3.4626
+#> 95% family-wise confidence level
+#>  
+#> 
+#> Linear Hypotheses:
+#>                  Estimate  lwr       upr      
+#> Lab2 - Lab1 == 0  0.156667 -2.849317  3.162651
+#> Lab3 - Lab1 == 0  0.166667 -2.839317  3.172651
+#> Lab4 - Lab1 == 0  0.173333 -2.832651  3.179317
+#> Lab5 - Lab1 == 0  0.180000 -2.825984  3.185984
+#> Lab6 - Lab1 == 0  0.736667 -2.269317  3.742651
+#> Lab7 - Lab1 == 0 -0.826667 -3.832651  2.179317
+#> Lab8 - Lab1 == 0  1.293333 -1.712651  4.299317
+#> Lab3 - Lab2 == 0  0.010000 -2.995984  3.015984
+#> Lab4 - Lab2 == 0  0.016667 -2.989317  3.022651
+#> Lab5 - Lab2 == 0  0.023333 -2.982651  3.029317
+#> Lab6 - Lab2 == 0  0.580000 -2.425984  3.585984
+#> Lab7 - Lab2 == 0 -0.983333 -3.989317  2.022651
+#> Lab8 - Lab2 == 0  1.136667 -1.869317  4.142651
+#> Lab4 - Lab3 == 0  0.006667 -2.999317  3.012651
+#> Lab5 - Lab3 == 0  0.013333 -2.992651  3.019317
+#> Lab6 - Lab3 == 0  0.570000 -2.435984  3.575984
+#> Lab7 - Lab3 == 0 -0.993333 -3.999317  2.012651
+#> Lab8 - Lab3 == 0  1.126667 -1.879317  4.132651
+#> Lab5 - Lab4 == 0  0.006667 -2.999317  3.012651
+#> Lab6 - Lab4 == 0  0.563333 -2.442651  3.569317
+#> Lab7 - Lab4 == 0 -1.000000 -4.005984  2.005984
+#> Lab8 - Lab4 == 0  1.120000 -1.885984  4.125984
+#> Lab6 - Lab5 == 0  0.556667 -2.449317  3.562651
+#> Lab7 - Lab5 == 0 -1.006667 -4.012651  1.999317
+#> Lab8 - Lab5 == 0  1.113333 -1.892651  4.119317
+#> Lab7 - Lab6 == 0 -1.563333 -4.569317  1.442651
+#> Lab8 - Lab6 == 0  0.556667 -2.449317  3.562651
+#> Lab8 - Lab7 == 0  2.120000 -0.885984  5.125984
+```
+
+<br> <br>
+
+## 2) Characterization of materials by thermogravimetric analysis
+
+-   **Graphical and analytical statistics**
