@@ -192,13 +192,39 @@
 </ul>
 <p>Accordingly, consistency tests and identification of atypical results must be performed previously to ANOVA analysis. There are two possible scenarios in which the presence of outliers can be evaluated: the first is that the results of one laboratory deviates from the others in terms of precision, that is, when the measurements made by a laboratory significantly differ with respect to the measurements obtained by other laboratories. The second scenario is related with the identification of outliers in a laboratory for a certain level.</p>
 <p>The statistics and tests recommended by ISO 5725-2 and ASTM E-691 are described below.</p>
-<ul><li>
-<strong>Mandel’s h statistic and Grubbs test</strong>:</li></ul>
+<ul>
+<li>
+<p><strong>Mandel’s h statistic and Grubbs test</strong>:</p>
 <p>If a laboratory is identified as an outlier, after applying the h statistic and the Grubbs test to different levels within a laboratory, this is an evidence of the presence of a laboratory high bias (due to a high systematic error in calibration, or errors in the equations used to compute the results).</p>
-<ul><li>
-<strong>Mandel’s k statistic and Cochran test</strong>:</li></ul>
+</li>
+<li>
+<p><strong>Mandel’s k statistic and Cochran test</strong>:</p>
 <p>The Cochran test only evaluates the highest value in a series of variances. If a laboratory is detected as an outlier, using the k statistic or with the Cochran test, this indicates that the variance within the laboratory is high (due to lack of familiarity with the analytical method, differences of appreciation among operators, inadequate equipment, equipment in poor state, or careless execution), in which case the total of results collected by this laboratory should be rejected and taken out of the study.</p>
 <p>The detection of inconsistent laboratories must be repeated until it stops reporting outliers. However, the consistency tests should be used with caution, because if this process is carried out in excess, could lead to false outlier identification.</p>
+</li>
+</ul>
+<p><br></p>
+</div>
+<div class="section level2">
+<h2 id="interlaboratory-studies-new-fda-approach">Interlaboratory Studies: New FDA Approach<a class="anchor" aria-label="anchor" href="#interlaboratory-studies-new-fda-approach"></a>
+</h2>
+<p>The ILS package have some techniques developed to check if inconsistent laboratories are detected either by outliers in the within-laboratory or in between-laboratory variability.</p>
+<ul><li>
+<p><strong>Hypothesis of reproducibility and repeatability</strong>:</p>
+<p>To test the hypothesis that there are no differences in the measurements between the laboratories in a study, functional statistics Hl(t) and Kl(t) are estimated for each laboratory.</p>
+<p>The null hypothesis of reproducibility states that …</p>
+<p>…….</p>
+<p>To evaluate the reproducibility of the laboratory results, the H(t) statistic is calculated as follows:</p>
+<p>…….</p>
+<p>To test the reproducibility hypothesis, the test statistic dH</p>
+<p>…….</p>
+<p>On the other hand, the null hypothesis of repeatability is:</p>
+<p>…….</p>
+<p>The repeatability test is based on the K(t) statistic, expressed as:</p>
+<p>…….</p>
+<p>The test statistic is dK.</p>
+</li></ul>
+<p>A bootstrap procedure to reproduce the distribution of these statistics under the corresponding null hypothesis is proposed in… This procedure provides the approximation of the critical values cK and cH of the test statistics dH and dK, respectively. Additionally, confidence bands for the functional statistics H(t) and K(t) can be computed (determined by the envelope of their bootstrap counterparts with a norm less than the corresponding critical value).</p>
 <p><br><br><br></p>
 <p>This is a basic example which shows you how to solve a common problem:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">

@@ -33,18 +33,6 @@ extensions of Mandel’s h and k statistics.
 
 <br>
 
-## Installation
-
-You can install the development version of ILSR6V1 from
-[GitHub](https://github.com/) with:
-
-``` r
-# install.packages("ILSR6V1")
-library("ILSR6V1")
-```
-
-<br>
-
 ## Concepts across the board
 
 **ILS package** addresses several concepts and approaches which will be
@@ -283,14 +271,83 @@ the functional statistics H(t) and K(t) can be computed (determined by
 the envelope of their bootstrap counterparts with a norm less than the
 corresponding critical value).
 
-<br> <br> <br>
+<br>
 
-This is a basic example which shows you how to solve a common problem:
+## ILS package Installation
+
+You can install the development version of ILSR6V1 from
+[GitHub](https://github.com/) with:
 
 ``` r
-library(ILSR6V1)
-## basic example code
+# install.packages("ILSR6V1")
+library("ILSR6V1")
 ```
+
+<br>
+
+## ILS package Practical examples
+
+## 1) Clinical study of blood glucose measurement
+
+The Glucose dataset corresponds to the serum glucose test (measurements
+of the concentration of glucose in the blood used to control the
+diabetes). In this study, eight laboratories where involved, and five
+different tests were performed on blood samples labelled with different
+references, ranging from a low sugar content to a very high one. Three
+replicates were obtained for each sample.
+
+Each of these laboratories measured five different concentration levels
+(A, B, C, D, E) of a given material, and at each of these levels, three
+measurements were taken (3 replicates). Each laboratory provided a total
+of 15 measurements (3 for each level), therefore, with 8 laboratories
+involved, 120 measurements were obtained.
+
+In order to access this dataset, the ILS package installing and loading
+is required. Once loading is performed, the Glucose data.frame object is
+called using the following instructions.
+
+``` r
+suppressWarnings(suppressMessages(library(ILS)))
+data("Glucose")
+```
+
+The first step to perform an analysis with the ILS package consist on
+using the function ils.qcdata() (quality control data) that receives a
+data.frame as an argument. By default, the first column of the data
+frame must contain the response variable, the second column the
+replicates, the third column corresponds to the tested material, while
+the fourth column includes the laboratories where the procedure was
+performed.
+
+For instance, the following code creates an object qcdata (of class
+ils.qcdata) and uses the summary() method to obtain descriptive
+statistics information of the dataset.
+
+``` r
+qcdata <- lab.qcdata(Glucose)
+summary(qcdata)
+#>        x          replicate material   laboratory
+#>  Min.   : 39.02   1:40      A:24     Lab1   :15  
+#>  1st Qu.: 78.45   2:40      B:24     Lab2   :15  
+#>  Median :135.03   3:40      C:24     Lab3   :15  
+#>  Mean   :149.09             D:24     Lab4   :15  
+#>  3rd Qu.:196.66             E:24     Lab5   :15  
+#>  Max.   :309.40                      Lab6   :15  
+#>                                      (Other):30
+
+plot(qcdata,
+     ylab = "Laboratory",
+     xlab = "Glucose concentration in blood")
+```
+
+<img src="man/figures/README-example_2-1.png" width="100%" />
+
+The figure shows the obtained values for each laboratory and material.
+It can be noted that the blood glucose level increases from material A
+to D and there is more variability between the results for each
+laboratory from material C to material E.
+
+<br> <br> <br>
 
 What is special about using `README.Rmd` instead of just `README.md`?
 You can include R chunks like so:
