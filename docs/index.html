@@ -109,16 +109,37 @@
       </header><div class="row">
   <div class="contents col-md-9">
 <div class="section level1">
-<div class="page-header"><h1 id="ilsr6v1">ILSR6V1<a class="anchor" aria-label="anchor" href="#ilsr6v1"></a>
+<div class="page-header"><h1 id="ils-an-r-package-for-statistical-analysis-in-interlaboratory-studies">ILS: An R package for statistical analysis in Interlaboratory Studies<a class="anchor" aria-label="anchor" href="#ils-an-r-package-for-statistical-analysis-in-interlaboratory-studies"></a>
 </h1></div>
-<!-- badges: start --><!-- badges: end --><p>The goal of ILSR6V1 is to ahhhhhhhhhhhhhhhh</p>
+<!-- badges: start --><!-- badges: end --><div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
+<p>The main objective of the ILS package is to detect laboratories that provide not consistent results, working simultaneously with different test materials, from the perspective of the Univariate Data Analysis and the Functional Data Analysis (FDA).</p>
+<p>The ILS package can identify laboratories that provide significantly different results through the estimation the Mandel’s h and k scalar statistics, based on the ASTM E691 and ISO 5725-2 standards. Additionally, the package has implemented tools to assess the presence of outliers using the Cochran and Grubbs tests.</p>
+<p>Furthermore, Analysis of Variance (ANOVA) techniques are provided, both for the cases of fixed and random effects, including confidence intervals for the principles parameters.</p>
+<p>On the other hand, One of the novelties of this package is the incorporation of tools to perform an ILS from a functional data analysis approach. Accordingly, the functional nature of the data obtained by experimental techniques corresponding to analytical chemistry, applied physics and engineering applications (spectra, thermograms, and sensor signals, among others) is taking into account by implementing the functional extensions of Mandel’s h and k statistics.</p>
+</div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>You can install the development version of ILSR6V1 from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
-<span><span class="fu">pak</span><span class="fu">::</span><span class="fu">pak</span><span class="op">(</span><span class="st">"davidtorres1818/ILSR6V1"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install.packages("ILSR6V1")</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st">"davidtorres1818/ILSR6V1"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="concepts-across-the-board">Concepts across the board<a class="anchor" aria-label="anchor" href="#concepts-across-the-board"></a>
+</h2>
+<p><strong>ILS package</strong> addresses several concepts and approaches which will be discussed in detail in the later sections of this article. The most relevant concepts can be found below:</p>
+<ul>
+<li>
+<p><strong>An Interlaboratory Study (ILS)</strong>:</p>
+<p>kasñaññsa</p>
+</li>
+<li><p><strong>R6-based design</strong>: uses R6 classes for flexibility and performance.</p></li>
+<li><p><strong>Interactive graphics</strong>: modern visualizations with <strong>ggplot2</strong> and <strong>plotly</strong>.</p></li>
+<li><p><strong>tidyverse integration</strong>: easy data manipulation and visualization.</p></li>
+</ul>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
