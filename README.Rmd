@@ -202,25 +202,71 @@ The statistics and tests recommended by ISO 5725-2 and ASTM E-691 are described 
 
 -   **Mandel’s h statistic and Grubbs test**:
 
-If a laboratory is identified as an outlier, after applying the h statistic and
-the Grubbs test to different levels within a laboratory, this is an evidence of the
-presence of a laboratory high bias (due to a high systematic error in calibration,
-or errors in the equations used to compute the results).
+    If a laboratory is identified as an outlier, after applying the h statistic and
+    the Grubbs test to different levels within a laboratory, this is an evidence of the
+    presence of a laboratory high bias (due to a high systematic error in calibration,
+    or errors in the equations used to compute the results).
 
 -   **Mandel’s k statistic and Cochran test**:
 
-The Cochran test only evaluates the highest value in a series of variances. If
-a laboratory is detected as an outlier, using the k statistic or with the Cochran
-test, this indicates that the variance within the laboratory is high (due to lack
-of familiarity with the analytical method, differences of appreciation among operators,
-inadequate equipment, equipment in poor state, or careless execution),
-in which case the total of results collected by this laboratory should be rejected
-and taken out of the study.
+    The Cochran test only evaluates the highest value in a series of variances. If
+    a laboratory is detected as an outlier, using the k statistic or with the Cochran
+    test, this indicates that the variance within the laboratory is high (due to lack
+    of familiarity with the analytical method, differences of appreciation among operators,
+    inadequate equipment, equipment in poor state, or careless execution),
+    in which case the total of results collected by this laboratory should be rejected
+    and taken out of the study.
+    
+    The detection of inconsistent laboratories must be repeated until it stops
+    reporting outliers. However, the consistency tests should be used with caution,
+    because if this process is carried out in excess, could lead to false outlier
+    identification.
 
-The detection of inconsistent laboratories must be repeated until it stops
-reporting outliers. However, the consistency tests should be used with caution,
-because if this process is carried out in excess, could lead to false outlier
-identification.
+<br>
+
+## Interlaboratory Studies: New FDA Approach
+
+The ILS package have some techniques developed to check if inconsistent laboratories
+are detected either by outliers in the within-laboratory or in between-laboratory variability.
+
+-   **Hypothesis of reproducibility and repeatability**:
+
+     To test the hypothesis that there are no differences in the measurements between
+     the laboratories in a study, functional statistics Hl(t) and Kl(t) are estimated
+     for each laboratory.
+     
+     The null hypothesis of reproducibility states that ...
+     
+     .......
+     
+     To evaluate the reproducibility of the laboratory results, the H(t) statistic is
+     calculated as follows:
+     
+     .......
+     
+     
+     To test
+     the reproducibility hypothesis, the test statistic dH
+     
+     .......
+     
+     On the other hand, the null hypothesis of repeatability is:
+     
+     .......
+     
+     The repeatability test is based on the K(t) statistic, expressed as:
+     
+     .......
+     
+     The test statistic is dK.
+
+A bootstrap procedure to reproduce the distribution of these statistics under
+the corresponding null hypothesis is proposed in... This procedure provides
+the approximation of the critical values cK and cH of the test statistics dH and dK,
+respectively. Additionally, confidence bands for the functional statistics
+H(t) and K(t) can be computed (determined by the envelope of their bootstrap
+counterparts with a norm less than the corresponding critical value).
+
 
 
 <br>
