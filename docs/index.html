@@ -80,9 +80,6 @@
       <a href="articles/index.html">Class constructors</a>
     </li>
     <li>
-      <a href="articles/index.html">Sample data</a>
-    </li>
-    <li>
       <a href="articles/index.html">Model / Formula</a>
     </li>
     <li>
@@ -90,8 +87,20 @@
     </li>
   </ul>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Examples of Use
+
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
 <li>
-  <a href="articles/index.html">Examples of Use</a>
+      <a href="articles/index.html">Clinical study of blood glucose measurement</a>
+    </li>
+    <li>
+      <a href="articles/index.html">Characterization of materials by thermogravimetric analysis</a>
+    </li>
+  </ul>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -101,7 +110,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/index.html">University of A Coruña</a>
+      <a href="articles/index.html">University of La Coruña</a>
     </li>
     <li>
       <a href="articles/index.html">Escuela Politécnica Nacional</a>
@@ -204,6 +213,7 @@
 </li>
 </ul>
 <p>Accordingly, consistency tests and identification of atypical results must be performed previously to ANOVA analysis. There are two possible scenarios in which the presence of outliers can be evaluated: the first is that the results of one laboratory deviates from the others in terms of precision, that is, when the measurements made by a laboratory significantly differ with respect to the measurements obtained by other laboratories. The second scenario is related with the identification of outliers in a laboratory for a certain level.</p>
+<p><br></p>
 <p>The statistics and tests recommended by ISO 5725-2 and ASTM E-691 are described below.</p>
 <ul>
 <li>
@@ -237,6 +247,7 @@
 <p>…….</p>
 <p>The test statistic is dK.</p>
 </li></ul>
+<p><br></p>
 <p>A bootstrap procedure to reproduce the distribution of these statistics under the corresponding null hypothesis is proposed in … This procedure provides the approximation of the critical values cK and cH of the test statistics dH and dK, respectively. Additionally, confidence bands for the functional statistics H(t) and K(t) can be computed (determined by the envelope of their bootstrap counterparts with a norm less than the corresponding critical value).</p>
 <p><br></p>
 </div>
@@ -254,6 +265,7 @@
 <div class="section level2">
 <h2 id="1-clinical-study-of-blood-glucose-measurement">1) Clinical study of blood glucose measurement<a class="anchor" aria-label="anchor" href="#1-clinical-study-of-blood-glucose-measurement"></a>
 </h2>
+<p><br></p>
 <ul><li><strong>Graphical and analytical statistics</strong></li></ul>
 <p>The Glucose dataset corresponds to the serum glucose test (measurements of the concentration of glucose in the blood used to control the diabetes). In this study, eight laboratories where involved, and five different tests were performed on blood samples labelled with different references, ranging from a low sugar content to a very high one. Three replicates were obtained for each sample.</p>
 <p>Each of these laboratories measured five different concentration levels (A, B, C, D, E) of a given material, and at each of these levels, three measurements were taken (3 replicates). Each laboratory provided a total of 15 measurements (3 for each level), therefore, with 8 laboratories involved, 120 measurements were obtained.</p>
@@ -447,12 +459,12 @@
 <span><span class="co">#&gt; Lab8 - Lab3 == 0  1.126667   0.868119   1.298    0.887</span></span>
 <span><span class="co">#&gt; Lab5 - Lab4 == 0  0.006667   0.868119   0.008    1.000</span></span>
 <span><span class="co">#&gt; Lab6 - Lab4 == 0  0.563333   0.868119   0.649    0.997</span></span>
-<span><span class="co">#&gt; Lab7 - Lab4 == 0 -1.000000   0.868119  -1.152    0.935</span></span>
+<span><span class="co">#&gt; Lab7 - Lab4 == 0 -1.000000   0.868119  -1.152    0.934</span></span>
 <span><span class="co">#&gt; Lab8 - Lab4 == 0  1.120000   0.868119   1.290    0.890</span></span>
 <span><span class="co">#&gt; Lab6 - Lab5 == 0  0.556667   0.868119   0.641    0.998</span></span>
 <span><span class="co">#&gt; Lab7 - Lab5 == 0 -1.006667   0.868119  -1.160    0.932</span></span>
 <span><span class="co">#&gt; Lab8 - Lab5 == 0  1.113333   0.868119   1.282    0.893</span></span>
-<span><span class="co">#&gt; Lab7 - Lab6 == 0 -1.563333   0.868119  -1.801    0.628</span></span>
+<span><span class="co">#&gt; Lab7 - Lab6 == 0 -1.563333   0.868119  -1.801    0.629</span></span>
 <span><span class="co">#&gt; Lab8 - Lab6 == 0  0.556667   0.868119   0.641    0.998</span></span>
 <span><span class="co">#&gt; Lab8 - Lab7 == 0  2.120000   0.868119   2.442    0.286</span></span>
 <span><span class="co">#&gt; (Adjusted p values reported -- single-step method)</span></span>
@@ -465,40 +477,40 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Fit: aov(formula = y ~ laboratory, data = data)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Quantile = 3.4625</span></span>
+<span><span class="co">#&gt; Quantile = 3.4594</span></span>
 <span><span class="co">#&gt; 95% family-wise confidence level</span></span>
 <span><span class="co">#&gt;  </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Linear Hypotheses:</span></span>
 <span><span class="co">#&gt;                  Estimate  lwr       upr      </span></span>
-<span><span class="co">#&gt; Lab2 - Lab1 == 0  0.156667 -2.849179  3.162513</span></span>
-<span><span class="co">#&gt; Lab3 - Lab1 == 0  0.166667 -2.839179  3.172513</span></span>
-<span><span class="co">#&gt; Lab4 - Lab1 == 0  0.173333 -2.832513  3.179179</span></span>
-<span><span class="co">#&gt; Lab5 - Lab1 == 0  0.180000 -2.825846  3.185846</span></span>
-<span><span class="co">#&gt; Lab6 - Lab1 == 0  0.736667 -2.269179  3.742513</span></span>
-<span><span class="co">#&gt; Lab7 - Lab1 == 0 -0.826667 -3.832513  2.179179</span></span>
-<span><span class="co">#&gt; Lab8 - Lab1 == 0  1.293333 -1.712513  4.299179</span></span>
-<span><span class="co">#&gt; Lab3 - Lab2 == 0  0.010000 -2.995846  3.015846</span></span>
-<span><span class="co">#&gt; Lab4 - Lab2 == 0  0.016667 -2.989179  3.022513</span></span>
-<span><span class="co">#&gt; Lab5 - Lab2 == 0  0.023333 -2.982513  3.029179</span></span>
-<span><span class="co">#&gt; Lab6 - Lab2 == 0  0.580000 -2.425846  3.585846</span></span>
-<span><span class="co">#&gt; Lab7 - Lab2 == 0 -0.983333 -3.989179  2.022513</span></span>
-<span><span class="co">#&gt; Lab8 - Lab2 == 0  1.136667 -1.869179  4.142513</span></span>
-<span><span class="co">#&gt; Lab4 - Lab3 == 0  0.006667 -2.999179  3.012513</span></span>
-<span><span class="co">#&gt; Lab5 - Lab3 == 0  0.013333 -2.992513  3.019179</span></span>
-<span><span class="co">#&gt; Lab6 - Lab3 == 0  0.570000 -2.435846  3.575846</span></span>
-<span><span class="co">#&gt; Lab7 - Lab3 == 0 -0.993333 -3.999179  2.012513</span></span>
-<span><span class="co">#&gt; Lab8 - Lab3 == 0  1.126667 -1.879179  4.132513</span></span>
-<span><span class="co">#&gt; Lab5 - Lab4 == 0  0.006667 -2.999179  3.012513</span></span>
-<span><span class="co">#&gt; Lab6 - Lab4 == 0  0.563333 -2.442513  3.569179</span></span>
-<span><span class="co">#&gt; Lab7 - Lab4 == 0 -1.000000 -4.005846  2.005846</span></span>
-<span><span class="co">#&gt; Lab8 - Lab4 == 0  1.120000 -1.885846  4.125846</span></span>
-<span><span class="co">#&gt; Lab6 - Lab5 == 0  0.556667 -2.449179  3.562513</span></span>
-<span><span class="co">#&gt; Lab7 - Lab5 == 0 -1.006667 -4.012513  1.999179</span></span>
-<span><span class="co">#&gt; Lab8 - Lab5 == 0  1.113333 -1.892513  4.119179</span></span>
-<span><span class="co">#&gt; Lab7 - Lab6 == 0 -1.563333 -4.569179  1.442513</span></span>
-<span><span class="co">#&gt; Lab8 - Lab6 == 0  0.556667 -2.449179  3.562513</span></span>
-<span><span class="co">#&gt; Lab8 - Lab7 == 0  2.120000 -0.885846  5.125846</span></span>
+<span><span class="co">#&gt; Lab2 - Lab1 == 0  0.156667 -2.846510  3.159843</span></span>
+<span><span class="co">#&gt; Lab3 - Lab1 == 0  0.166667 -2.836510  3.169843</span></span>
+<span><span class="co">#&gt; Lab4 - Lab1 == 0  0.173333 -2.829843  3.176510</span></span>
+<span><span class="co">#&gt; Lab5 - Lab1 == 0  0.180000 -2.823176  3.183176</span></span>
+<span><span class="co">#&gt; Lab6 - Lab1 == 0  0.736667 -2.266510  3.739843</span></span>
+<span><span class="co">#&gt; Lab7 - Lab1 == 0 -0.826667 -3.829843  2.176510</span></span>
+<span><span class="co">#&gt; Lab8 - Lab1 == 0  1.293333 -1.709843  4.296510</span></span>
+<span><span class="co">#&gt; Lab3 - Lab2 == 0  0.010000 -2.993176  3.013176</span></span>
+<span><span class="co">#&gt; Lab4 - Lab2 == 0  0.016667 -2.986510  3.019843</span></span>
+<span><span class="co">#&gt; Lab5 - Lab2 == 0  0.023333 -2.979843  3.026510</span></span>
+<span><span class="co">#&gt; Lab6 - Lab2 == 0  0.580000 -2.423176  3.583176</span></span>
+<span><span class="co">#&gt; Lab7 - Lab2 == 0 -0.983333 -3.986510  2.019843</span></span>
+<span><span class="co">#&gt; Lab8 - Lab2 == 0  1.136667 -1.866510  4.139843</span></span>
+<span><span class="co">#&gt; Lab4 - Lab3 == 0  0.006667 -2.996510  3.009843</span></span>
+<span><span class="co">#&gt; Lab5 - Lab3 == 0  0.013333 -2.989843  3.016510</span></span>
+<span><span class="co">#&gt; Lab6 - Lab3 == 0  0.570000 -2.433176  3.573176</span></span>
+<span><span class="co">#&gt; Lab7 - Lab3 == 0 -0.993333 -3.996510  2.009843</span></span>
+<span><span class="co">#&gt; Lab8 - Lab3 == 0  1.126667 -1.876510  4.129843</span></span>
+<span><span class="co">#&gt; Lab5 - Lab4 == 0  0.006667 -2.996510  3.009843</span></span>
+<span><span class="co">#&gt; Lab6 - Lab4 == 0  0.563333 -2.439843  3.566510</span></span>
+<span><span class="co">#&gt; Lab7 - Lab4 == 0 -1.000000 -4.003176  2.003176</span></span>
+<span><span class="co">#&gt; Lab8 - Lab4 == 0  1.120000 -1.883176  4.123176</span></span>
+<span><span class="co">#&gt; Lab6 - Lab5 == 0  0.556667 -2.446510  3.559843</span></span>
+<span><span class="co">#&gt; Lab7 - Lab5 == 0 -1.006667 -4.009843  1.996510</span></span>
+<span><span class="co">#&gt; Lab8 - Lab5 == 0  1.113333 -1.889843  4.116510</span></span>
+<span><span class="co">#&gt; Lab7 - Lab6 == 0 -1.563333 -4.566510  1.439843</span></span>
+<span><span class="co">#&gt; Lab8 - Lab6 == 0  0.556667 -2.446510  3.559843</span></span>
+<span><span class="co">#&gt; Lab8 - Lab7 == 0  2.120000 -0.883176  5.123176</span></span>
 <span><span class="co">#&gt; $Models</span></span>
 <span><span class="co">#&gt; $Models$`Material: A`</span></span>
 <span><span class="co">#&gt; Call:</span></span>
@@ -523,45 +535,46 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Fit: aov(formula = y ~ laboratory, data = data)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Quantile = 3.4625</span></span>
+<span><span class="co">#&gt; Quantile = 3.4594</span></span>
 <span><span class="co">#&gt; 95% family-wise confidence level</span></span>
 <span><span class="co">#&gt;  </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Linear Hypotheses:</span></span>
 <span><span class="co">#&gt;                  Estimate  lwr       upr      </span></span>
-<span><span class="co">#&gt; Lab2 - Lab1 == 0  0.156667 -2.849179  3.162513</span></span>
-<span><span class="co">#&gt; Lab3 - Lab1 == 0  0.166667 -2.839179  3.172513</span></span>
-<span><span class="co">#&gt; Lab4 - Lab1 == 0  0.173333 -2.832513  3.179179</span></span>
-<span><span class="co">#&gt; Lab5 - Lab1 == 0  0.180000 -2.825846  3.185846</span></span>
-<span><span class="co">#&gt; Lab6 - Lab1 == 0  0.736667 -2.269179  3.742513</span></span>
-<span><span class="co">#&gt; Lab7 - Lab1 == 0 -0.826667 -3.832513  2.179179</span></span>
-<span><span class="co">#&gt; Lab8 - Lab1 == 0  1.293333 -1.712513  4.299179</span></span>
-<span><span class="co">#&gt; Lab3 - Lab2 == 0  0.010000 -2.995846  3.015846</span></span>
-<span><span class="co">#&gt; Lab4 - Lab2 == 0  0.016667 -2.989179  3.022513</span></span>
-<span><span class="co">#&gt; Lab5 - Lab2 == 0  0.023333 -2.982513  3.029179</span></span>
-<span><span class="co">#&gt; Lab6 - Lab2 == 0  0.580000 -2.425846  3.585846</span></span>
-<span><span class="co">#&gt; Lab7 - Lab2 == 0 -0.983333 -3.989179  2.022513</span></span>
-<span><span class="co">#&gt; Lab8 - Lab2 == 0  1.136667 -1.869179  4.142513</span></span>
-<span><span class="co">#&gt; Lab4 - Lab3 == 0  0.006667 -2.999179  3.012513</span></span>
-<span><span class="co">#&gt; Lab5 - Lab3 == 0  0.013333 -2.992513  3.019179</span></span>
-<span><span class="co">#&gt; Lab6 - Lab3 == 0  0.570000 -2.435846  3.575846</span></span>
-<span><span class="co">#&gt; Lab7 - Lab3 == 0 -0.993333 -3.999179  2.012513</span></span>
-<span><span class="co">#&gt; Lab8 - Lab3 == 0  1.126667 -1.879179  4.132513</span></span>
-<span><span class="co">#&gt; Lab5 - Lab4 == 0  0.006667 -2.999179  3.012513</span></span>
-<span><span class="co">#&gt; Lab6 - Lab4 == 0  0.563333 -2.442513  3.569179</span></span>
-<span><span class="co">#&gt; Lab7 - Lab4 == 0 -1.000000 -4.005846  2.005846</span></span>
-<span><span class="co">#&gt; Lab8 - Lab4 == 0  1.120000 -1.885846  4.125846</span></span>
-<span><span class="co">#&gt; Lab6 - Lab5 == 0  0.556667 -2.449179  3.562513</span></span>
-<span><span class="co">#&gt; Lab7 - Lab5 == 0 -1.006667 -4.012513  1.999179</span></span>
-<span><span class="co">#&gt; Lab8 - Lab5 == 0  1.113333 -1.892513  4.119179</span></span>
-<span><span class="co">#&gt; Lab7 - Lab6 == 0 -1.563333 -4.569179  1.442513</span></span>
-<span><span class="co">#&gt; Lab8 - Lab6 == 0  0.556667 -2.449179  3.562513</span></span>
-<span><span class="co">#&gt; Lab8 - Lab7 == 0  2.120000 -0.885846  5.125846</span></span></code></pre></div>
+<span><span class="co">#&gt; Lab2 - Lab1 == 0  0.156667 -2.846510  3.159843</span></span>
+<span><span class="co">#&gt; Lab3 - Lab1 == 0  0.166667 -2.836510  3.169843</span></span>
+<span><span class="co">#&gt; Lab4 - Lab1 == 0  0.173333 -2.829843  3.176510</span></span>
+<span><span class="co">#&gt; Lab5 - Lab1 == 0  0.180000 -2.823176  3.183176</span></span>
+<span><span class="co">#&gt; Lab6 - Lab1 == 0  0.736667 -2.266510  3.739843</span></span>
+<span><span class="co">#&gt; Lab7 - Lab1 == 0 -0.826667 -3.829843  2.176510</span></span>
+<span><span class="co">#&gt; Lab8 - Lab1 == 0  1.293333 -1.709843  4.296510</span></span>
+<span><span class="co">#&gt; Lab3 - Lab2 == 0  0.010000 -2.993176  3.013176</span></span>
+<span><span class="co">#&gt; Lab4 - Lab2 == 0  0.016667 -2.986510  3.019843</span></span>
+<span><span class="co">#&gt; Lab5 - Lab2 == 0  0.023333 -2.979843  3.026510</span></span>
+<span><span class="co">#&gt; Lab6 - Lab2 == 0  0.580000 -2.423176  3.583176</span></span>
+<span><span class="co">#&gt; Lab7 - Lab2 == 0 -0.983333 -3.986510  2.019843</span></span>
+<span><span class="co">#&gt; Lab8 - Lab2 == 0  1.136667 -1.866510  4.139843</span></span>
+<span><span class="co">#&gt; Lab4 - Lab3 == 0  0.006667 -2.996510  3.009843</span></span>
+<span><span class="co">#&gt; Lab5 - Lab3 == 0  0.013333 -2.989843  3.016510</span></span>
+<span><span class="co">#&gt; Lab6 - Lab3 == 0  0.570000 -2.433176  3.573176</span></span>
+<span><span class="co">#&gt; Lab7 - Lab3 == 0 -0.993333 -3.996510  2.009843</span></span>
+<span><span class="co">#&gt; Lab8 - Lab3 == 0  1.126667 -1.876510  4.129843</span></span>
+<span><span class="co">#&gt; Lab5 - Lab4 == 0  0.006667 -2.996510  3.009843</span></span>
+<span><span class="co">#&gt; Lab6 - Lab4 == 0  0.563333 -2.439843  3.566510</span></span>
+<span><span class="co">#&gt; Lab7 - Lab4 == 0 -1.000000 -4.003176  2.003176</span></span>
+<span><span class="co">#&gt; Lab8 - Lab4 == 0  1.120000 -1.883176  4.123176</span></span>
+<span><span class="co">#&gt; Lab6 - Lab5 == 0  0.556667 -2.446510  3.559843</span></span>
+<span><span class="co">#&gt; Lab7 - Lab5 == 0 -1.006667 -4.009843  1.996510</span></span>
+<span><span class="co">#&gt; Lab8 - Lab5 == 0  1.113333 -1.889843  4.116510</span></span>
+<span><span class="co">#&gt; Lab7 - Lab6 == 0 -1.563333 -4.566510  1.439843</span></span>
+<span><span class="co">#&gt; Lab8 - Lab6 == 0  0.556667 -2.446510  3.559843</span></span>
+<span><span class="co">#&gt; Lab8 - Lab7 == 0  2.120000 -0.883176  5.123176</span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level2">
 <h2 id="2-characterization-of-materials-by-thermogravimetric-analysis">2) Characterization of materials by thermogravimetric analysis<a class="anchor" aria-label="anchor" href="#2-characterization-of-materials-by-thermogravimetric-analysis"></a>
 </h2>
+<p><br></p>
 <ul><li><strong>Graphical and functional analytical statistics</strong></li></ul>
 <p>This exmample is about 7 (emulated) laboratories that analysed 15 samples of calcium oxalate by Thermogravimetric (TG) techniques, obtaining 105 TG curves that shows the mass loss of oxalate as a function of temperature when the oxalate samples were heated at 20◦C/min. The TG dataset contains the resulting values at 1000 discretization points, corresponding to temperatures ranging from 40◦C to 850◦C. Laboratories 1, 6, and 7 presented non-consistent results. In laboratory 1 a Simultaneous Thermal Analyzer (STA) was used with an out of phase calibration program. In laboratory 6, we used a simultaneous SDT analyser with an old calibration, and finally, in laboratory 7, we used a simultaneous SDT analyser with a bias in the the temperature calibration with respect to the real values (2◦C displaced with respect to the melting point of the zinc).</p>
 <p>From the TG curves, a second set of data called IDT was obtained. The IDT (Initial Decomposition Temperature) is a parameter defined by the temperature at which the studied material losses the 5% of its weight when it is heated at a constant rate. The dataset is composed of the IDT values of the calcium oxalate samples analyzed by the 7 laboratories. It is an example of ILS study with scalar response, obtained by extracting just only one representative feature from the TG curve. It is important to stress that when a feature extraction process is performed, there is the risk of loosing relevant information and thus obtaining erroneous findings.</p>
