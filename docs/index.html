@@ -369,7 +369,7 @@
 <span><span class="co">#&gt; Lab7 TRUE TRUE  TRUE FALSE TRUE</span></span>
 <span><span class="co">#&gt; Lab8 TRUE TRUE  TRUE FALSE TRUE</span></span></code></pre></div>
 <ul><li><strong>Outliers detection</strong></li></ul>
-<p>laboratories with very extreme results were detected by using the Grubbs’ test, i.e. laboratories defined by very large or small results (glucose content).</p>
+<p>Laboratories with very extreme results were detected by using the Grubbs’ test, i.e. laboratories defined by very large or small results (glucose content).</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/ILS/man/grubbs.test.html" class="external-link">grubbs.test</a></span><span class="op">(</span><span class="va">qcdata</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -384,7 +384,7 @@
 <span><span class="co">#&gt; 3        C Lab4 2.984235      0.0102 Lab7 1.387137      0.1040</span></span>
 <span><span class="co">#&gt; 4        D Lab8 2.388179      0.0241 Lab7 2.423819      0.0229</span></span>
 <span><span class="co">#&gt; 5        E Lab2 1.576391      0.0795 Lab7 1.551749      0.0823</span></span></code></pre></div>
-<p>Once the outlier laboratories are removed, one-way ANOVA analysis and mean comparison test can be performed [1]. The ILS package provides function ils.aov() to perform an analysis of variance considering random or fixed effects of the laboratory factor depending on the value of the random argument. By setting this parameter to TRUE, a random effects one-way ANOVA is done for each material, providing the corresponding F tests and confidence intervals for the variances. For instance, the following code shows an example using the results of one material for the sake of simplicity.</p>
+<p>Once the outlier laboratories are removed, one-way ANOVA analysis and mean comparison test can be performed. The ILS package provides function ils.aov() to perform an analysis of variance considering random or fixed effects of the laboratory factor depending on the value of the random argument. By setting this parameter to TRUE, a random effects one-way ANOVA is done for each material, providing the corresponding F tests and confidence intervals for the variances. For instance, the following code shows an example using the results of one material for the sake of simplicity.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Glucose2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">Glucose</span>, <span class="va">Material</span> <span class="op">==</span> <span class="st">"A"</span><span class="op">)</span></span>
 <span><span class="va">Glucose2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ILS/man/lab.qcdata.html" class="external-link">lab.qcdata</a></span><span class="op">(</span><span class="va">Glucose2</span><span class="op">)</span></span>
@@ -424,7 +424,7 @@
 <span><span class="co">#&gt; Lab8 - Lab3 == 0  1.126667   0.868119   1.298    0.887</span></span>
 <span><span class="co">#&gt; Lab5 - Lab4 == 0  0.006667   0.868119   0.008    1.000</span></span>
 <span><span class="co">#&gt; Lab6 - Lab4 == 0  0.563333   0.868119   0.649    0.997</span></span>
-<span><span class="co">#&gt; Lab7 - Lab4 == 0 -1.000000   0.868119  -1.152    0.935</span></span>
+<span><span class="co">#&gt; Lab7 - Lab4 == 0 -1.000000   0.868119  -1.152    0.934</span></span>
 <span><span class="co">#&gt; Lab8 - Lab4 == 0  1.120000   0.868119   1.290    0.890</span></span>
 <span><span class="co">#&gt; Lab6 - Lab5 == 0  0.556667   0.868119   0.641    0.998</span></span>
 <span><span class="co">#&gt; Lab7 - Lab5 == 0 -1.006667   0.868119  -1.160    0.932</span></span>
@@ -442,40 +442,40 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Fit: aov(formula = y ~ laboratory, data = data)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Quantile = 3.4626</span></span>
+<span><span class="co">#&gt; Quantile = 3.4603</span></span>
 <span><span class="co">#&gt; 95% family-wise confidence level</span></span>
 <span><span class="co">#&gt;  </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Linear Hypotheses:</span></span>
 <span><span class="co">#&gt;                  Estimate  lwr       upr      </span></span>
-<span><span class="co">#&gt; Lab2 - Lab1 == 0  0.156667 -2.849317  3.162651</span></span>
-<span><span class="co">#&gt; Lab3 - Lab1 == 0  0.166667 -2.839317  3.172651</span></span>
-<span><span class="co">#&gt; Lab4 - Lab1 == 0  0.173333 -2.832651  3.179317</span></span>
-<span><span class="co">#&gt; Lab5 - Lab1 == 0  0.180000 -2.825984  3.185984</span></span>
-<span><span class="co">#&gt; Lab6 - Lab1 == 0  0.736667 -2.269317  3.742651</span></span>
-<span><span class="co">#&gt; Lab7 - Lab1 == 0 -0.826667 -3.832651  2.179317</span></span>
-<span><span class="co">#&gt; Lab8 - Lab1 == 0  1.293333 -1.712651  4.299317</span></span>
-<span><span class="co">#&gt; Lab3 - Lab2 == 0  0.010000 -2.995984  3.015984</span></span>
-<span><span class="co">#&gt; Lab4 - Lab2 == 0  0.016667 -2.989317  3.022651</span></span>
-<span><span class="co">#&gt; Lab5 - Lab2 == 0  0.023333 -2.982651  3.029317</span></span>
-<span><span class="co">#&gt; Lab6 - Lab2 == 0  0.580000 -2.425984  3.585984</span></span>
-<span><span class="co">#&gt; Lab7 - Lab2 == 0 -0.983333 -3.989317  2.022651</span></span>
-<span><span class="co">#&gt; Lab8 - Lab2 == 0  1.136667 -1.869317  4.142651</span></span>
-<span><span class="co">#&gt; Lab4 - Lab3 == 0  0.006667 -2.999317  3.012651</span></span>
-<span><span class="co">#&gt; Lab5 - Lab3 == 0  0.013333 -2.992651  3.019317</span></span>
-<span><span class="co">#&gt; Lab6 - Lab3 == 0  0.570000 -2.435984  3.575984</span></span>
-<span><span class="co">#&gt; Lab7 - Lab3 == 0 -0.993333 -3.999317  2.012651</span></span>
-<span><span class="co">#&gt; Lab8 - Lab3 == 0  1.126667 -1.879317  4.132651</span></span>
-<span><span class="co">#&gt; Lab5 - Lab4 == 0  0.006667 -2.999317  3.012651</span></span>
-<span><span class="co">#&gt; Lab6 - Lab4 == 0  0.563333 -2.442651  3.569317</span></span>
-<span><span class="co">#&gt; Lab7 - Lab4 == 0 -1.000000 -4.005984  2.005984</span></span>
-<span><span class="co">#&gt; Lab8 - Lab4 == 0  1.120000 -1.885984  4.125984</span></span>
-<span><span class="co">#&gt; Lab6 - Lab5 == 0  0.556667 -2.449317  3.562651</span></span>
-<span><span class="co">#&gt; Lab7 - Lab5 == 0 -1.006667 -4.012651  1.999317</span></span>
-<span><span class="co">#&gt; Lab8 - Lab5 == 0  1.113333 -1.892651  4.119317</span></span>
-<span><span class="co">#&gt; Lab7 - Lab6 == 0 -1.563333 -4.569317  1.442651</span></span>
-<span><span class="co">#&gt; Lab8 - Lab6 == 0  0.556667 -2.449317  3.562651</span></span>
-<span><span class="co">#&gt; Lab8 - Lab7 == 0  2.120000 -0.885984  5.125984</span></span>
+<span><span class="co">#&gt; Lab2 - Lab1 == 0  0.156667 -2.847316  3.160650</span></span>
+<span><span class="co">#&gt; Lab3 - Lab1 == 0  0.166667 -2.837316  3.170650</span></span>
+<span><span class="co">#&gt; Lab4 - Lab1 == 0  0.173333 -2.830650  3.177316</span></span>
+<span><span class="co">#&gt; Lab5 - Lab1 == 0  0.180000 -2.823983  3.183983</span></span>
+<span><span class="co">#&gt; Lab6 - Lab1 == 0  0.736667 -2.267316  3.740650</span></span>
+<span><span class="co">#&gt; Lab7 - Lab1 == 0 -0.826667 -3.830650  2.177316</span></span>
+<span><span class="co">#&gt; Lab8 - Lab1 == 0  1.293333 -1.710650  4.297316</span></span>
+<span><span class="co">#&gt; Lab3 - Lab2 == 0  0.010000 -2.993983  3.013983</span></span>
+<span><span class="co">#&gt; Lab4 - Lab2 == 0  0.016667 -2.987316  3.020650</span></span>
+<span><span class="co">#&gt; Lab5 - Lab2 == 0  0.023333 -2.980650  3.027316</span></span>
+<span><span class="co">#&gt; Lab6 - Lab2 == 0  0.580000 -2.423983  3.583983</span></span>
+<span><span class="co">#&gt; Lab7 - Lab2 == 0 -0.983333 -3.987316  2.020650</span></span>
+<span><span class="co">#&gt; Lab8 - Lab2 == 0  1.136667 -1.867316  4.140650</span></span>
+<span><span class="co">#&gt; Lab4 - Lab3 == 0  0.006667 -2.997316  3.010650</span></span>
+<span><span class="co">#&gt; Lab5 - Lab3 == 0  0.013333 -2.990650  3.017316</span></span>
+<span><span class="co">#&gt; Lab6 - Lab3 == 0  0.570000 -2.433983  3.573983</span></span>
+<span><span class="co">#&gt; Lab7 - Lab3 == 0 -0.993333 -3.997316  2.010650</span></span>
+<span><span class="co">#&gt; Lab8 - Lab3 == 0  1.126667 -1.877316  4.130650</span></span>
+<span><span class="co">#&gt; Lab5 - Lab4 == 0  0.006667 -2.997316  3.010650</span></span>
+<span><span class="co">#&gt; Lab6 - Lab4 == 0  0.563333 -2.440650  3.567316</span></span>
+<span><span class="co">#&gt; Lab7 - Lab4 == 0 -1.000000 -4.003983  2.003983</span></span>
+<span><span class="co">#&gt; Lab8 - Lab4 == 0  1.120000 -1.883983  4.123983</span></span>
+<span><span class="co">#&gt; Lab6 - Lab5 == 0  0.556667 -2.447316  3.560650</span></span>
+<span><span class="co">#&gt; Lab7 - Lab5 == 0 -1.006667 -4.010650  1.997316</span></span>
+<span><span class="co">#&gt; Lab8 - Lab5 == 0  1.113333 -1.890650  4.117316</span></span>
+<span><span class="co">#&gt; Lab7 - Lab6 == 0 -1.563333 -4.567316  1.440650</span></span>
+<span><span class="co">#&gt; Lab8 - Lab6 == 0  0.556667 -2.447316  3.560650</span></span>
+<span><span class="co">#&gt; Lab8 - Lab7 == 0  2.120000 -0.883983  5.123983</span></span>
 <span><span class="co">#&gt; $Models</span></span>
 <span><span class="co">#&gt; $Models$`Material: A`</span></span>
 <span><span class="co">#&gt; Call:</span></span>
@@ -500,40 +500,40 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Fit: aov(formula = y ~ laboratory, data = data)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Quantile = 3.4626</span></span>
+<span><span class="co">#&gt; Quantile = 3.4603</span></span>
 <span><span class="co">#&gt; 95% family-wise confidence level</span></span>
 <span><span class="co">#&gt;  </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Linear Hypotheses:</span></span>
 <span><span class="co">#&gt;                  Estimate  lwr       upr      </span></span>
-<span><span class="co">#&gt; Lab2 - Lab1 == 0  0.156667 -2.849317  3.162651</span></span>
-<span><span class="co">#&gt; Lab3 - Lab1 == 0  0.166667 -2.839317  3.172651</span></span>
-<span><span class="co">#&gt; Lab4 - Lab1 == 0  0.173333 -2.832651  3.179317</span></span>
-<span><span class="co">#&gt; Lab5 - Lab1 == 0  0.180000 -2.825984  3.185984</span></span>
-<span><span class="co">#&gt; Lab6 - Lab1 == 0  0.736667 -2.269317  3.742651</span></span>
-<span><span class="co">#&gt; Lab7 - Lab1 == 0 -0.826667 -3.832651  2.179317</span></span>
-<span><span class="co">#&gt; Lab8 - Lab1 == 0  1.293333 -1.712651  4.299317</span></span>
-<span><span class="co">#&gt; Lab3 - Lab2 == 0  0.010000 -2.995984  3.015984</span></span>
-<span><span class="co">#&gt; Lab4 - Lab2 == 0  0.016667 -2.989317  3.022651</span></span>
-<span><span class="co">#&gt; Lab5 - Lab2 == 0  0.023333 -2.982651  3.029317</span></span>
-<span><span class="co">#&gt; Lab6 - Lab2 == 0  0.580000 -2.425984  3.585984</span></span>
-<span><span class="co">#&gt; Lab7 - Lab2 == 0 -0.983333 -3.989317  2.022651</span></span>
-<span><span class="co">#&gt; Lab8 - Lab2 == 0  1.136667 -1.869317  4.142651</span></span>
-<span><span class="co">#&gt; Lab4 - Lab3 == 0  0.006667 -2.999317  3.012651</span></span>
-<span><span class="co">#&gt; Lab5 - Lab3 == 0  0.013333 -2.992651  3.019317</span></span>
-<span><span class="co">#&gt; Lab6 - Lab3 == 0  0.570000 -2.435984  3.575984</span></span>
-<span><span class="co">#&gt; Lab7 - Lab3 == 0 -0.993333 -3.999317  2.012651</span></span>
-<span><span class="co">#&gt; Lab8 - Lab3 == 0  1.126667 -1.879317  4.132651</span></span>
-<span><span class="co">#&gt; Lab5 - Lab4 == 0  0.006667 -2.999317  3.012651</span></span>
-<span><span class="co">#&gt; Lab6 - Lab4 == 0  0.563333 -2.442651  3.569317</span></span>
-<span><span class="co">#&gt; Lab7 - Lab4 == 0 -1.000000 -4.005984  2.005984</span></span>
-<span><span class="co">#&gt; Lab8 - Lab4 == 0  1.120000 -1.885984  4.125984</span></span>
-<span><span class="co">#&gt; Lab6 - Lab5 == 0  0.556667 -2.449317  3.562651</span></span>
-<span><span class="co">#&gt; Lab7 - Lab5 == 0 -1.006667 -4.012651  1.999317</span></span>
-<span><span class="co">#&gt; Lab8 - Lab5 == 0  1.113333 -1.892651  4.119317</span></span>
-<span><span class="co">#&gt; Lab7 - Lab6 == 0 -1.563333 -4.569317  1.442651</span></span>
-<span><span class="co">#&gt; Lab8 - Lab6 == 0  0.556667 -2.449317  3.562651</span></span>
-<span><span class="co">#&gt; Lab8 - Lab7 == 0  2.120000 -0.885984  5.125984</span></span></code></pre></div>
+<span><span class="co">#&gt; Lab2 - Lab1 == 0  0.156667 -2.847316  3.160650</span></span>
+<span><span class="co">#&gt; Lab3 - Lab1 == 0  0.166667 -2.837316  3.170650</span></span>
+<span><span class="co">#&gt; Lab4 - Lab1 == 0  0.173333 -2.830650  3.177316</span></span>
+<span><span class="co">#&gt; Lab5 - Lab1 == 0  0.180000 -2.823983  3.183983</span></span>
+<span><span class="co">#&gt; Lab6 - Lab1 == 0  0.736667 -2.267316  3.740650</span></span>
+<span><span class="co">#&gt; Lab7 - Lab1 == 0 -0.826667 -3.830650  2.177316</span></span>
+<span><span class="co">#&gt; Lab8 - Lab1 == 0  1.293333 -1.710650  4.297316</span></span>
+<span><span class="co">#&gt; Lab3 - Lab2 == 0  0.010000 -2.993983  3.013983</span></span>
+<span><span class="co">#&gt; Lab4 - Lab2 == 0  0.016667 -2.987316  3.020650</span></span>
+<span><span class="co">#&gt; Lab5 - Lab2 == 0  0.023333 -2.980650  3.027316</span></span>
+<span><span class="co">#&gt; Lab6 - Lab2 == 0  0.580000 -2.423983  3.583983</span></span>
+<span><span class="co">#&gt; Lab7 - Lab2 == 0 -0.983333 -3.987316  2.020650</span></span>
+<span><span class="co">#&gt; Lab8 - Lab2 == 0  1.136667 -1.867316  4.140650</span></span>
+<span><span class="co">#&gt; Lab4 - Lab3 == 0  0.006667 -2.997316  3.010650</span></span>
+<span><span class="co">#&gt; Lab5 - Lab3 == 0  0.013333 -2.990650  3.017316</span></span>
+<span><span class="co">#&gt; Lab6 - Lab3 == 0  0.570000 -2.433983  3.573983</span></span>
+<span><span class="co">#&gt; Lab7 - Lab3 == 0 -0.993333 -3.997316  2.010650</span></span>
+<span><span class="co">#&gt; Lab8 - Lab3 == 0  1.126667 -1.877316  4.130650</span></span>
+<span><span class="co">#&gt; Lab5 - Lab4 == 0  0.006667 -2.997316  3.010650</span></span>
+<span><span class="co">#&gt; Lab6 - Lab4 == 0  0.563333 -2.440650  3.567316</span></span>
+<span><span class="co">#&gt; Lab7 - Lab4 == 0 -1.000000 -4.003983  2.003983</span></span>
+<span><span class="co">#&gt; Lab8 - Lab4 == 0  1.120000 -1.883983  4.123983</span></span>
+<span><span class="co">#&gt; Lab6 - Lab5 == 0  0.556667 -2.447316  3.560650</span></span>
+<span><span class="co">#&gt; Lab7 - Lab5 == 0 -1.006667 -4.010650  1.997316</span></span>
+<span><span class="co">#&gt; Lab8 - Lab5 == 0  1.113333 -1.890650  4.117316</span></span>
+<span><span class="co">#&gt; Lab7 - Lab6 == 0 -1.563333 -4.567316  1.440650</span></span>
+<span><span class="co">#&gt; Lab8 - Lab6 == 0  0.556667 -2.447316  3.560650</span></span>
+<span><span class="co">#&gt; Lab8 - Lab7 == 0  2.120000 -0.883983  5.123983</span></span></code></pre></div>
 <p><br><br></p>
 </div>
 <div class="section level2">

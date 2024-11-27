@@ -50,7 +50,7 @@ the functional extensions of Mandel’s h and k statistics.
 in detail in the later sections of this article. The most relevant concepts can be
 found below:
 
--   **Interlaboratory Study (ILS)**:
+-   **Interlaboratory Study (ILS)**
 
     This concept can be defined as a control procedure to
     evaluate the performance of a group of laboratories through a collaborative
@@ -64,7 +64,7 @@ found below:
     of the most common factors that may be a cause of variability are: the equipment
     of laboratories, operators, materials, temperature and humidity, among others.
     
--   **Repeatability and Reproducibility studies (R&R)**:
+-   **Repeatability and Reproducibility studies (R&R)**
 
     Repeatability and reproducibility (R&R) studies are a relevant methodology in
     quality control that assess the accuracy of a measurement system. In addition,
@@ -82,7 +82,7 @@ found below:
     characteristics on the same part. In other words, how much variation do we see
     in measurements taken by different people on the same part using the same too.
 
--   **Consistency tests**:
+-   **Consistency tests**
 
     Several scalar statistical techniques are frequently applied to study the consistency
     of test results from the different laboratories that participate in an ILS.
@@ -98,7 +98,7 @@ found below:
     
     [ISO 5725-2](https://es.scribd.com/document/745647300/NTP-ISO-5725-2-2021-Antecedente-2019)
 
--   **ANOVA tests**:
+-   **ANOVA tests**
 
     The technique of  Analysis of Variance (ANOVA), the effect of the laboratory
     factor over the response can be studied. The variance of repeatability and
@@ -147,6 +147,8 @@ ILS package uses the applications of the before mentioned multcomp and fda.usc
 In summary, the functions incorporated to the ILS package to perform Interlaboratory Studies
 are classified under the following scheme:
 
+.......
+
 <br>
 
 ## Interlaboratory Studies: Standard Approach
@@ -159,7 +161,7 @@ As mentioned in the previous section, among the methodologies used to evaluate t
 consistency of laboratory results, we must highlight the r&R studies, which quantify
 the variability between laboratories (reproducibility) and variability between results (repeatability).
 
--   **Mandel’s h and k statistic**:
+-   **Mandel’s h and k statistic**
 
     Accordingly with the repeatability and reproducibility concepts, this statistics are used
     in ILS to detect laboratories that provide inconsistent results. The h statistic
@@ -173,7 +175,7 @@ the variability between laboratories (reproducibility) and variability between r
     which is normally calculated with a significance level of 0.5% (as recommended
     by ASTM E-691).
 
--   **Cochran and Grubbs test**:
+-   **Cochran and Grubbs test**
 
     The aim oh these tests is to examine the consistency within a laboratory, whereas
     the Grubbs test is commonly used to examine consistency between laboratories.
@@ -190,14 +192,14 @@ outliers in a laboratory for a certain level.
 
 The statistics and tests recommended by ISO 5725-2 and ASTM E-691 are described below.
 
--   **Mandel’s h statistic and Grubbs test**:
+-   **Mandel’s h statistic and Grubbs test**
 
     If a laboratory is identified as an outlier, after applying the h statistic and
     the Grubbs test to different levels within a laboratory, this is an evidence of the
     presence of a laboratory high bias (due to a high systematic error in calibration,
     or errors in the equations used to compute the results).
 
--   **Mandel’s k statistic and Cochran test**:
+-   **Mandel’s k statistic and Cochran test**
 
     The Cochran test only evaluates the highest value in a series of variances. If
     a laboratory is detected as an outlier, using the k statistic or with the Cochran
@@ -225,7 +227,7 @@ are detected either by outliers in the within-laboratory or in between-laborator
      the laboratories in a study, functional statistics Hl(t) and Kl(t) are estimated
      for each laboratory.
      
-     The null hypothesis of reproducibility states that ...
+     The null hypothesis of reproducibility states that
      
      .......
      
@@ -251,7 +253,7 @@ are detected either by outliers in the within-laboratory or in between-laborator
      The test statistic is dK.
 
 A bootstrap procedure to reproduce the distribution of these statistics under
-the corresponding null hypothesis is proposed in... This procedure provides
+the corresponding null hypothesis is proposed in ... This procedure provides
 the approximation of the critical values cK and cH of the test statistics dH and dK,
 respectively. Additionally, confidence bands for the functional statistics
 H(t) and K(t) can be computed (determined by the envelope of their bootstrap
@@ -299,6 +301,7 @@ using the following instructions.
 suppressWarnings(suppressMessages(library(ILS)))
 data("Glucose")
 ```
+<br>
 
 The first step to perform an analysis with the ILS package consist on using
 the function ils.qcdata() (quality control data) that receives a data.frame
@@ -348,8 +351,7 @@ plot(qcstat,
      xlab = "Deviations",
      ylab = "Material")
 ```
-
-In the figure presented,, the values of S (the global deviation of all laboratories), Sr
+In the figure presented, the values of S (the global deviation of all laboratories), Sr
 (the repeatability’s deviation), SR (reproducibility’s deviation) and SB (the
 deviation between the means of the laboratories) are shown for each material.
 A greater variability can be noted from material C to material E. Materials C
@@ -377,14 +379,12 @@ plot(k)
 
 <br>
 <br>
-<br>
 
 In the figure above, the dotted line represents the critical value equal to 2.06,
 obtained for p = 8, n = 15 and α = 0.005 (following the ASTM standard). Hence,
 outliers were detected for the laboratory 2, when testing the material 5, and for
 material 3, when is tested by the laboratory 4, since the corresponding values
 of the k statistics were greater than the critical value.
-
 
 The summary() method prints the violations matrix. If an entry of this matrix
 is FALSE, the laboratory reports outlying results for the corresponding material
@@ -412,9 +412,11 @@ therefore, from this result it can be seen in Figure 6 that laboratories 4, 7 an
 h <- h.qcs(qcdata, alpha = 0.005)
 plot(h)
 
+
 summary(h)
 ```
 
+<br>
 
 -   **Outliers detection**
 
@@ -442,8 +444,152 @@ lab.aov(Glucose2, random = TRUE, level = 0.95)
 ```
 
 <br>
-<br>
 
 ## 2) Characterization of materials by thermogravimetric analysis
 
--   **Graphical and analytical statistics**
+-   **Graphical and functional analytical statistics**
+
+This exmample is about 7 (emulated) laboratories that analysed 15 samples of calcium oxalate by
+Thermogravimetric (TG) techniques, obtaining 105 TG curves that shows the
+mass loss of oxalate as a function of temperature when the oxalate samples were
+heated at 20◦C/min. The TG dataset contains the resulting values at 1000 discretization points,
+corresponding to temperatures ranging from 40◦C to 850◦C.
+Laboratories 1, 6, and 7 presented non-consistent results. In laboratory 1 a Simultaneous
+Thermal Analyzer (STA) was used with an out of phase calibration
+program. In laboratory 6, we used a simultaneous SDT analyser with an old
+calibration, and finally, in laboratory 7, we used a simultaneous SDT analyser
+with a bias in the the temperature calibration with respect to the real values
+(2◦C displaced with respect to the melting point of the zinc).
+
+From the TG curves, a second set of data called IDT was obtained. The IDT
+(Initial Decomposition Temperature) is a parameter defined by the temperature
+at which the studied material losses the 5% of its weight when it is heated at a
+constant rate. The dataset is composed of the IDT values of the calcium oxalate
+samples analyzed by the 7 laboratories. It is an example of ILS study with scalar
+response, obtained by extracting just only one representative feature from the
+TG curve. It is important to stress that when a feature extraction process is
+performed, there is the risk of loosing relevant information and thus obtaining
+erroneous findings.
+
+For the estimation of the functional statistics (for the performance of the
+graphical and analytical methods), the procedure is the same as for the scalar
+case. The ILS package provides the ils.fqcdata() function to generate the
+functional quality control data from a matrix (or a data.frame), in which each
+row represents a test result. The dimension of the matrix must be n×m, where n
+is the number of replicates performed by the laboratories that participate in the
+study, and m is the number of points observed in each curve. The usual methods
+were implemented to make plots and summaries of the resulting objects.
+
+<br>
+
+To create an object that contains the functional quality control data from
+the TG dataset, first we defined the grid in which the observations were obtained.
+In this case, the grid consists of 1000 temperature values ranging from 40◦C to
+850◦C.
+
+```{r example_10}
+data(TG)
+delta <- seq(from = 40, to = 850, length.out = 1000)
+fqcdata <- ils.fqcdata(TG, p = 7, argvals = delta)
+plot(x = fqcdata,
+     main = "TG curves of calcium oxalate",
+     xlab = "Temperature (C)",
+     ylab = "Mass (%)",
+     legend = TRUE, x.co = 20, y.co = 90)
+```
+
+In the figure above, the TG curves are presented. The following commands create
+a fqcstat object containing the functional statistics from fqcdata, and plot it
+afterwards.
+
+<br>
+
+```{r example_11}
+fqcstat <- ils.fqcs(fqcdata)
+plot(fqcstat, xlab = "Temperature (C)", ylab = "Mass (%)")
+```
+
+The result is shown in this Figure. The plot() method creates a panel with four
+graphs, in the first row the functional means and variances for each laboratory
+are presented, while in the second row the global functional mean and variance
+are plotted.
+
+<br>
+
+-   **Consistency tests**
+
+With the aim to perform a r&R study of the TG and DSC functional datasets described
+in the previous section, the corresponding statistics H(t), K(t), dH and dK will be estimated
+and graphically represented. As above mentioned, the TG dataset contains thermogravimetric
+test results from 7 laboratories, while the DSC dataset contains results from 6 laboratories
+(excluding laboratory 1). Laboratories 1, 5 and 6 have provided different results from the
+remaining laboratories and should be detected as outliers.
+
+Function mandel.fqcs() estimates the functional statistics Hl(t) and Kl(t),
+and the test statistics dKl and dHl, l = 1 . . . p. It also performs the bootstrap
+procedure described in [6] to approximate the cK and cH critical values, and to
+compute functional confidence bands for H(t) and K(t), under the corresponding null hypothesis. 
+The results can be plotted with the default method.
+
+```{r example_12}
+set.seed(777)
+mandel.tg <- mandel.fqcs(fqcdata, nb = 100)
+plot(mandel.tg)
+```
+
+The left panels of the figure show the dKl and dHl test statistics for each
+laboratory, l = 1 . . . p, as well as the corresponding critical values cH and cK
+(horizontal lines), constructed at a significance level of α = 0.01. In the case
+of the dH statistic, it is concluded that laboratory 7 does not meet the reproducibility
+hypothesis (according with [6], laboratories 1, 6, and 7 were detected
+as outliers through an iterative process). When the repeatability hypothesis is
+tested by the dK test statistic, laboratory 6 is identified as an outlier in the first iteration.
+
+The right panels of the figure show the functional statistics Hl(t) and Kl(t)
+for each laboratory, l = 1 . . . p, as well as the corresponding confidence bands
+(dotted lines in black). Functional estimates with a significant large test statistic
+are shown with a solid line. These functional estimates allow us to identify in
+which time intervals the laboratories provide different results. In this case,
+the differences between the laboratory 7 and the remaining are in the interval
+corresponding to the first degradation process of calcium oxalate.
+
+<br>
+
+-   **Outliers detection**
+
+Finally, the ILS package is used to perform outlier detection tasks in the
+Interlaboratory Study defined by the DSC dataset.
+
+```{r example_13}
+data(DSC)
+fqcdata.dsc <- ils.fqcdata(DSC, p = 6,
+                           index.laboratory = paste("Lab", 2:7),
+                           argvals = delta)
+mandel.dsc <- mandel.fqcs(fqcdata.dsc,
+                          nb = 100)
+plot(mandel.dsc)
+```
+
+The figure shows that repeatability hypothesis is not reject. Otherwise, the reproducibility
+hypothesis is rejected, and laboratory 6 is properly detected as an outlier (see top panels
+of the figure).
+
+<br>
+
+## Conclusions
+
+The ILS package has been implemented in R software with the aim to provide the main
+descriptive and outlier detection tools dealing with the Interlaboratory Studies and
+recommended by the ISO 5725-4-1994 and ASTM E-691 standards. Namely, Mandels’s h
+and k test (including their graphical output), Grubbs’ test, Cochran’s test, in addition
+to ANOVA utilities.
+
+Moreover, apart from standard scalar statistical techniques, the ILS
+package provides FDA techniques to deal with functional data (curves), as data
+unit, in the framework of Interlaboratory Studies. Indeed, the main novelty of
+this computational proposal is the implementation of the functional extensions
+of the h and k Mandel’s statistics when data results are curves, preventing to lose
+relevant information derived from reduction dimension and feature extraction
+processes. These new methods can identify successfully the outlier laboratories
+directly from data curves.
+
