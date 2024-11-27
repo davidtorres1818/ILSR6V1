@@ -190,6 +190,8 @@ laboratory significantly differ with respect to the measurements obtained by
 other laboratories. The second scenario is related with the identification of
 outliers in a laboratory for a certain level.
 
+<br>
+
 The statistics and tests recommended by ISO 5725-2 and ASTM E-691 are described below.
 
 -   **Mandel’s h statistic and Grubbs test**
@@ -251,6 +253,8 @@ are detected either by outliers in the within-laboratory or in between-laborator
      .......
      
      The test statistic is dK.
+     
+<br>
 
 A bootstrap procedure to reproduce the distribution of these statistics under
 the corresponding null hypothesis is proposed in ... This procedure provides
@@ -278,6 +282,8 @@ library("ILSR6V1")
 
 
 ## 1) Clinical study of blood glucose measurement
+
+<br>
 
 -   **Graphical and analytical statistics**
 
@@ -446,6 +452,8 @@ lab.aov(Glucose2, random = TRUE, level = 0.95)
 <br>
 
 ## 2) Characterization of materials by thermogravimetric analysis
+
+<br>
 
 -   **Graphical and functional analytical statistics**
 

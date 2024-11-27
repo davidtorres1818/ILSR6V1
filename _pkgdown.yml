@@ -26,17 +26,19 @@ navbar:
            href: articles/index.html
         -  text: Class constructors
            href: articles/index.html
-        -  text: Sample data
-           href: articles/index.html
         -  text: Model / Formula
            href: articles/index.html
         -  text: Functions R6
            href: articles/index.html
       - text: "Examples of Use"
-        href: articles/index.html
+        menu:
+        -  text: Clinical study of blood glucose measurement
+           href: articles/index.html
+        -  text: Characterization of materials by thermogravimetric analysis
+           href: articles/index.html
       - text: "Acknowledgements"
         menu:
-        -  text: University of A Coruña
+        -  text: University of La Coruña
            href: articles/index.html
         -  text: Escuela Politécnica Nacional
            href: articles/index.html
