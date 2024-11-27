@@ -12,16 +12,26 @@ navbar:
         href: index.html
       - text: "Quality Control Packages"
         menu:
-        -  text: R6Qualitytools
+        -  text: R6qualitytools
            href: articles/index.html
         -  text: ILS
            href: articles/index.html
         -  text: QCR
            href: articles/index.html
-        -  text: QUEE
+        -  text: QUEUE
            href: articles/index.html
       - text: "Functions ILS"
-        href: articles/index.html
+        menu:
+        -  text: Sample data
+           href: articles/index.html
+        -  text: Class constructors
+           href: articles/index.html
+        -  text: Sample data
+           href: articles/index.html
+        -  text: Model / Formula
+           href: articles/index.html
+        -  text: Functions R6
+           href: articles/index.html
       - text: "Examples of Use"
         href: articles/index.html
       - text: "Acknowledgements"

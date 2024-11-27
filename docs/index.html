@@ -126,26 +126,26 @@
 <p><strong>ILS package</strong> addresses several concepts and approaches which will be discussed in detail in the later sections of this article. The most relevant concepts can be found below:</p>
 <ul>
 <li>
-<p><strong>Interlaboratory Study (ILS)</strong>:</p>
+<p><strong>Interlaboratory Study (ILS)</strong></p>
 <p>This concept can be defined as a control procedure to evaluate the performance of a group of laboratories through a collaborative trials. In an Interlaboratory Study, an adequate number of laboratories are chosen to participate in the experiment with the aim of analyzing the samples and obtain results.</p>
 <p>Participating laboratories receive samples (previously homogenized or to be homogenized by the laboratories) for analysis, then, the measurements results of the laboratories are evaluated according to the degree of data variability. Some of the most common factors that may be a cause of variability are: the equipment of laboratories, operators, materials, temperature and humidity, among others.</p>
 </li>
 <li>
-<p><strong>Repeatability and Reproducibility studies (R&amp;R)</strong>:</p>
+<p><strong>Repeatability and Reproducibility studies (R&amp;R)</strong></p>
 <p>Repeatability and reproducibility (R&amp;R) studies are a relevant methodology in quality control that assess the accuracy of a measurement system. In addition, R&amp;R studies allow the identification of errors and sources of variation in the measurement process, and are essential to ensure the reliability and accuracy of the results.</p>
 <p>This tool of quality control focuses on two key aspects of measurement:</p>
 <p><strong>Repeatability:</strong> Repeatability is the variation between successive measurements of the same part or trait by the same person using the same gage. In other words, how much variation do we see in measurements taken by the same person, on the same part, using the same tool.</p>
 <p><strong>Reproducibility:</strong> Reproducibility is the difference in the average of the measurements made by different people using the same instrument when measuring the identical characteristics on the same part. In other words, how much variation do we see in measurements taken by different people on the same part using the same too.</p>
 </li>
 <li>
-<p><strong>Consistency tests</strong>:</p>
+<p><strong>Consistency tests</strong></p>
 <p>Several scalar statistical techniques are frequently applied to study the consistency of test results from the different laboratories that participate in an ILS. Standard ASTM E-691 (Standard Practice for Conducting an Interlaboratory Study to Determine the Precision of a Test Method) recommends applying only one graphical technique from Mandel’s k and h statistics [2], while ISO 5725-2 (Accuracy – trueness and precision – of measurement methods and results) recommends, in addition to the graphic technique, to use the Cochran and Grubbs.</p>
 <p>The 2 standards mentioned can be consulted in the following accesses:</p>
 <p><a href="https://www.astm.org/e0691-21.html" class="external-link">ASTM E-691</a></p>
 <p><a href="https://es.scribd.com/document/745647300/NTP-ISO-5725-2-2021-Antecedente-2019" class="external-link">ISO 5725-2</a></p>
 </li>
 <li>
-<p><strong>ANOVA tests</strong>:</p>
+<p><strong>ANOVA tests</strong></p>
 <p>The technique of Analysis of Variance (ANOVA), the effect of the laboratory factor over the response can be studied. The variance of repeatability and reproducibility can be also estimated when an ANOVA random effects model is considered, as shown in ISO 5725-2 [1]. On the other hand, if a fixed effect model is fitted, in addition to the F test, multiple comparisons of means can be performed with the Tukey Honest Significant Difference (HSD) method.</p>
 </li>
 <li>
@@ -163,6 +163,7 @@
 <p>Particularly, the metRology package estimates the uncertainty of the measurement, and performs the required statistical calculations for Interlaboratory Studies, whereas multcomp performs analysis of variance (ANOVA) through F and Tuckey tests.</p>
 <p>On the other hand, due to the exponential increasing of FDA available techniques, there are also a continuously increasing number of R libraries devoted to this branch of statistics. Among all of them, the most important and used packages (on which the present proposal is based) are fda.usc, that implements outlier detection techniques and functional ANOVA, among other tools for FDA, and the fda. The present ILS package uses the applications of the before mentioned multcomp and fda.usc</p>
 <p>In summary, the functions incorporated to the ILS package to perform Interlaboratory Studies are classified under the following scheme:</p>
+<p>…….</p>
 <p><br></p>
 </div>
 <div class="section level2">
@@ -172,12 +173,12 @@
 <p>As mentioned in the previous section, among the methodologies used to evaluate the consistency of laboratory results, we must highlight the r&amp;R studies, which quantify the variability between laboratories (reproducibility) and variability between results (repeatability).</p>
 <ul>
 <li>
-<p><strong>Mandel’s h and k statistic</strong>:</p>
+<p><strong>Mandel’s h and k statistic</strong></p>
 <p>Accordingly with the repeatability and reproducibility concepts, this statistics are used in ILS to detect laboratories that provide inconsistent results. The h statistic explains the variability between the laboratories, that is, estimates the bias, which is the difference of the means of each laboratory with respect to the global mean, while the k statistic estimates the variability within the laboratories, comparing the repeatability corresponding to each laboratory.</p>
 <p>The decision rule for detecting whether a laboratory is inconsistent is based on the comparison between the value of the h or k statistic and the critical value, which is normally calculated with a significance level of 0.5% (as recommended by ASTM E-691).</p>
 </li>
 <li>
-<p><strong>Cochran and Grubbs test</strong>:</p>
+<p><strong>Cochran and Grubbs test</strong></p>
 <p>The aim oh these tests is to examine the consistency within a laboratory, whereas the Grubbs test is commonly used to examine consistency between laboratories. The Grubbs test can also be used as a consistency test for the results obtained in a laboratory using identical materials. These tests are recommended by ISO 5725-2.</p>
 </li>
 </ul>
@@ -185,11 +186,11 @@
 <p>The statistics and tests recommended by ISO 5725-2 and ASTM E-691 are described below.</p>
 <ul>
 <li>
-<p><strong>Mandel’s h statistic and Grubbs test</strong>:</p>
+<p><strong>Mandel’s h statistic and Grubbs test</strong></p>
 <p>If a laboratory is identified as an outlier, after applying the h statistic and the Grubbs test to different levels within a laboratory, this is an evidence of the presence of a laboratory high bias (due to a high systematic error in calibration, or errors in the equations used to compute the results).</p>
 </li>
 <li>
-<p><strong>Mandel’s k statistic and Cochran test</strong>:</p>
+<p><strong>Mandel’s k statistic and Cochran test</strong></p>
 <p>The Cochran test only evaluates the highest value in a series of variances. If a laboratory is detected as an outlier, using the k statistic or with the Cochran test, this indicates that the variance within the laboratory is high (due to lack of familiarity with the analytical method, differences of appreciation among operators, inadequate equipment, equipment in poor state, or careless execution), in which case the total of results collected by this laboratory should be rejected and taken out of the study.</p>
 <p>The detection of inconsistent laboratories must be repeated until it stops reporting outliers. However, the consistency tests should be used with caution, because if this process is carried out in excess, could lead to false outlier identification.</p>
 </li>
@@ -203,7 +204,7 @@
 <ul><li>
 <p><strong>Hypothesis of reproducibility and repeatability</strong>:</p>
 <p>To test the hypothesis that there are no differences in the measurements between the laboratories in a study, functional statistics Hl(t) and Kl(t) are estimated for each laboratory.</p>
-<p>The null hypothesis of reproducibility states that …</p>
+<p>The null hypothesis of reproducibility states that</p>
 <p>…….</p>
 <p>To evaluate the reproducibility of the laboratory results, the H(t) statistic is calculated as follows:</p>
 <p>…….</p>
@@ -215,7 +216,7 @@
 <p>…….</p>
 <p>The test statistic is dK.</p>
 </li></ul>
-<p>A bootstrap procedure to reproduce the distribution of these statistics under the corresponding null hypothesis is proposed in… This procedure provides the approximation of the critical values cK and cH of the test statistics dH and dK, respectively. Additionally, confidence bands for the functional statistics H(t) and K(t) can be computed (determined by the envelope of their bootstrap counterparts with a norm less than the corresponding critical value).</p>
+<p>A bootstrap procedure to reproduce the distribution of these statistics under the corresponding null hypothesis is proposed in … This procedure provides the approximation of the critical values cK and cH of the test statistics dH and dK, respectively. Additionally, confidence bands for the functional statistics H(t) and K(t) can be computed (determined by the envelope of their bootstrap counterparts with a norm less than the corresponding critical value).</p>
 <p><br></p>
 </div>
 <div class="section level2">
@@ -239,6 +240,7 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mflores72000/ILS/" class="external-link">ILS</a></span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"Glucose"</span><span class="op">)</span></span></code></pre></div>
+<p><br></p>
 <p>The first step to perform an analysis with the ILS package consist on using the function ils.qcdata() (quality control data) that receives a data.frame as an argument. By default, the first column of the data frame must contain the response variable, the second column the replicates, the third column corresponds to the tested material, while the fourth column includes the laboratories where the procedure was performed.</p>
 <p>For instance, the following code creates an object qcdata (of class ils.qcdata) and uses the summary() method to obtain descriptive statistics information of the dataset.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -301,8 +303,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">qcstat</span>,</span>
 <span>     xlab <span class="op">=</span> <span class="st">"Deviations"</span>,</span>
 <span>     ylab <span class="op">=</span> <span class="st">"Material"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-example_3-1.png" width="100%"></p>
-<p>In the figure presented,, the values of S (the global deviation of all laboratories), Sr (the repeatability’s deviation), SR (reproducibility’s deviation) and SB (the deviation between the means of the laboratories) are shown for each material. A greater variability can be noted from material C to material E. Materials C and D have a greater variability between the results of the laboratories (SR) and within them (Sr).</p>
+<p><img src="reference/figures/README-example_3-1.png" width="100%"> In the figure presented, the values of S (the global deviation of all laboratories), Sr (the repeatability’s deviation), SR (reproducibility’s deviation) and SB (the deviation between the means of the laboratories) are shown for each material. A greater variability can be noted from material C to material E. Materials C and D have a greater variability between the results of the laboratories (SR) and within them (Sr).</p>
 <p><br></p>
 <ul><li><strong>Consistency tests</strong></li></ul>
 <p>First, an analysis of the variability for each laboratory will be performed. For this purpose, the k statistic (k.qcs()) and the Cochran test (cochran.test()) will be used to identify if there is any laboratory with non-consistent results. Subsequently, the h statistic (h.qcs()) and the Grubbs test (grubbs.test()) will be used to perform an analysis to evaluate inter-laboratory variability.</p>
@@ -311,7 +312,7 @@
 <code class="sourceCode R"><span><span class="va">k</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ILS/man/k.qcs.html" class="external-link">k.qcs</a></span><span class="op">(</span><span class="va">qcdata</span>, alpha <span class="op">=</span> <span class="fl">0.005</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">k</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-example_4-1.png" width="100%"></p>
-<p><br><br><br></p>
+<p><br><br></p>
 <p>In the figure above, the dotted line represents the critical value equal to 2.06, obtained for p = 8, n = 15 and α = 0.005 (following the ASTM standard). Hence, outliers were detected for the laboratory 2, when testing the material 5, and for material 3, when is tested by the laboratory 4, since the corresponding values of the k statistics were greater than the critical value.</p>
 <p>The summary() method prints the violations matrix. If an entry of this matrix is FALSE, the laboratory reports outlying results for the corresponding material at the specified significance level.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -352,7 +353,8 @@
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">h</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-example_7-1.png" width="100%"></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">h</span><span class="op">)</span></span>
+<code class="sourceCode R"><span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">h</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Number of laboratories:  8</span></span>
 <span><span class="co">#&gt; Number of materials:  5</span></span>
@@ -368,6 +370,7 @@
 <span><span class="co">#&gt; Lab6 TRUE TRUE  TRUE  TRUE TRUE</span></span>
 <span><span class="co">#&gt; Lab7 TRUE TRUE  TRUE FALSE TRUE</span></span>
 <span><span class="co">#&gt; Lab8 TRUE TRUE  TRUE FALSE TRUE</span></span></code></pre></div>
+<p><br></p>
 <ul><li><strong>Outliers detection</strong></li></ul>
 <p>Laboratories with very extreme results were detected by using the Grubbs’ test, i.e. laboratories defined by very large or small results (glucose content).</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
@@ -392,8 +395,7 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  AOV of Material: 1            Df Sum Sq Mean Sq F value Pr(&gt;F)</span></span>
 <span><span class="co">#&gt; laboratory   7  7.715   1.102   0.975  0.482</span></span>
-<span><span class="co">#&gt; Residuals   16 18.087   1.130</span></span>
-<span><span class="co">#&gt; Warning in RET$pfunction("adjusted", ...): Completion with error &gt; abseps</span></span>
+<span><span class="co">#&gt; Residuals   16 18.087   1.130               </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   Simultaneous Tests for General Linear Hypotheses</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -424,7 +426,7 @@
 <span><span class="co">#&gt; Lab8 - Lab3 == 0  1.126667   0.868119   1.298    0.887</span></span>
 <span><span class="co">#&gt; Lab5 - Lab4 == 0  0.006667   0.868119   0.008    1.000</span></span>
 <span><span class="co">#&gt; Lab6 - Lab4 == 0  0.563333   0.868119   0.649    0.997</span></span>
-<span><span class="co">#&gt; Lab7 - Lab4 == 0 -1.000000   0.868119  -1.152    0.934</span></span>
+<span><span class="co">#&gt; Lab7 - Lab4 == 0 -1.000000   0.868119  -1.152    0.935</span></span>
 <span><span class="co">#&gt; Lab8 - Lab4 == 0  1.120000   0.868119   1.290    0.890</span></span>
 <span><span class="co">#&gt; Lab6 - Lab5 == 0  0.556667   0.868119   0.641    0.998</span></span>
 <span><span class="co">#&gt; Lab7 - Lab5 == 0 -1.006667   0.868119  -1.160    0.932</span></span>
@@ -442,40 +444,40 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Fit: aov(formula = y ~ laboratory, data = data)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Quantile = 3.4603</span></span>
+<span><span class="co">#&gt; Quantile = 3.4625</span></span>
 <span><span class="co">#&gt; 95% family-wise confidence level</span></span>
 <span><span class="co">#&gt;  </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Linear Hypotheses:</span></span>
 <span><span class="co">#&gt;                  Estimate  lwr       upr      </span></span>
-<span><span class="co">#&gt; Lab2 - Lab1 == 0  0.156667 -2.847316  3.160650</span></span>
-<span><span class="co">#&gt; Lab3 - Lab1 == 0  0.166667 -2.837316  3.170650</span></span>
-<span><span class="co">#&gt; Lab4 - Lab1 == 0  0.173333 -2.830650  3.177316</span></span>
-<span><span class="co">#&gt; Lab5 - Lab1 == 0  0.180000 -2.823983  3.183983</span></span>
-<span><span class="co">#&gt; Lab6 - Lab1 == 0  0.736667 -2.267316  3.740650</span></span>
-<span><span class="co">#&gt; Lab7 - Lab1 == 0 -0.826667 -3.830650  2.177316</span></span>
-<span><span class="co">#&gt; Lab8 - Lab1 == 0  1.293333 -1.710650  4.297316</span></span>
-<span><span class="co">#&gt; Lab3 - Lab2 == 0  0.010000 -2.993983  3.013983</span></span>
-<span><span class="co">#&gt; Lab4 - Lab2 == 0  0.016667 -2.987316  3.020650</span></span>
-<span><span class="co">#&gt; Lab5 - Lab2 == 0  0.023333 -2.980650  3.027316</span></span>
-<span><span class="co">#&gt; Lab6 - Lab2 == 0  0.580000 -2.423983  3.583983</span></span>
-<span><span class="co">#&gt; Lab7 - Lab2 == 0 -0.983333 -3.987316  2.020650</span></span>
-<span><span class="co">#&gt; Lab8 - Lab2 == 0  1.136667 -1.867316  4.140650</span></span>
-<span><span class="co">#&gt; Lab4 - Lab3 == 0  0.006667 -2.997316  3.010650</span></span>
-<span><span class="co">#&gt; Lab5 - Lab3 == 0  0.013333 -2.990650  3.017316</span></span>
-<span><span class="co">#&gt; Lab6 - Lab3 == 0  0.570000 -2.433983  3.573983</span></span>
-<span><span class="co">#&gt; Lab7 - Lab3 == 0 -0.993333 -3.997316  2.010650</span></span>
-<span><span class="co">#&gt; Lab8 - Lab3 == 0  1.126667 -1.877316  4.130650</span></span>
-<span><span class="co">#&gt; Lab5 - Lab4 == 0  0.006667 -2.997316  3.010650</span></span>
-<span><span class="co">#&gt; Lab6 - Lab4 == 0  0.563333 -2.440650  3.567316</span></span>
-<span><span class="co">#&gt; Lab7 - Lab4 == 0 -1.000000 -4.003983  2.003983</span></span>
-<span><span class="co">#&gt; Lab8 - Lab4 == 0  1.120000 -1.883983  4.123983</span></span>
-<span><span class="co">#&gt; Lab6 - Lab5 == 0  0.556667 -2.447316  3.560650</span></span>
-<span><span class="co">#&gt; Lab7 - Lab5 == 0 -1.006667 -4.010650  1.997316</span></span>
-<span><span class="co">#&gt; Lab8 - Lab5 == 0  1.113333 -1.890650  4.117316</span></span>
-<span><span class="co">#&gt; Lab7 - Lab6 == 0 -1.563333 -4.567316  1.440650</span></span>
-<span><span class="co">#&gt; Lab8 - Lab6 == 0  0.556667 -2.447316  3.560650</span></span>
-<span><span class="co">#&gt; Lab8 - Lab7 == 0  2.120000 -0.883983  5.123983</span></span>
+<span><span class="co">#&gt; Lab2 - Lab1 == 0  0.156667 -2.849179  3.162513</span></span>
+<span><span class="co">#&gt; Lab3 - Lab1 == 0  0.166667 -2.839179  3.172513</span></span>
+<span><span class="co">#&gt; Lab4 - Lab1 == 0  0.173333 -2.832513  3.179179</span></span>
+<span><span class="co">#&gt; Lab5 - Lab1 == 0  0.180000 -2.825846  3.185846</span></span>
+<span><span class="co">#&gt; Lab6 - Lab1 == 0  0.736667 -2.269179  3.742513</span></span>
+<span><span class="co">#&gt; Lab7 - Lab1 == 0 -0.826667 -3.832513  2.179179</span></span>
+<span><span class="co">#&gt; Lab8 - Lab1 == 0  1.293333 -1.712513  4.299179</span></span>
+<span><span class="co">#&gt; Lab3 - Lab2 == 0  0.010000 -2.995846  3.015846</span></span>
+<span><span class="co">#&gt; Lab4 - Lab2 == 0  0.016667 -2.989179  3.022513</span></span>
+<span><span class="co">#&gt; Lab5 - Lab2 == 0  0.023333 -2.982513  3.029179</span></span>
+<span><span class="co">#&gt; Lab6 - Lab2 == 0  0.580000 -2.425846  3.585846</span></span>
+<span><span class="co">#&gt; Lab7 - Lab2 == 0 -0.983333 -3.989179  2.022513</span></span>
+<span><span class="co">#&gt; Lab8 - Lab2 == 0  1.136667 -1.869179  4.142513</span></span>
+<span><span class="co">#&gt; Lab4 - Lab3 == 0  0.006667 -2.999179  3.012513</span></span>
+<span><span class="co">#&gt; Lab5 - Lab3 == 0  0.013333 -2.992513  3.019179</span></span>
+<span><span class="co">#&gt; Lab6 - Lab3 == 0  0.570000 -2.435846  3.575846</span></span>
+<span><span class="co">#&gt; Lab7 - Lab3 == 0 -0.993333 -3.999179  2.012513</span></span>
+<span><span class="co">#&gt; Lab8 - Lab3 == 0  1.126667 -1.879179  4.132513</span></span>
+<span><span class="co">#&gt; Lab5 - Lab4 == 0  0.006667 -2.999179  3.012513</span></span>
+<span><span class="co">#&gt; Lab6 - Lab4 == 0  0.563333 -2.442513  3.569179</span></span>
+<span><span class="co">#&gt; Lab7 - Lab4 == 0 -1.000000 -4.005846  2.005846</span></span>
+<span><span class="co">#&gt; Lab8 - Lab4 == 0  1.120000 -1.885846  4.125846</span></span>
+<span><span class="co">#&gt; Lab6 - Lab5 == 0  0.556667 -2.449179  3.562513</span></span>
+<span><span class="co">#&gt; Lab7 - Lab5 == 0 -1.006667 -4.012513  1.999179</span></span>
+<span><span class="co">#&gt; Lab8 - Lab5 == 0  1.113333 -1.892513  4.119179</span></span>
+<span><span class="co">#&gt; Lab7 - Lab6 == 0 -1.563333 -4.569179  1.442513</span></span>
+<span><span class="co">#&gt; Lab8 - Lab6 == 0  0.556667 -2.449179  3.562513</span></span>
+<span><span class="co">#&gt; Lab8 - Lab7 == 0  2.120000 -0.885846  5.125846</span></span>
 <span><span class="co">#&gt; $Models</span></span>
 <span><span class="co">#&gt; $Models$`Material: A`</span></span>
 <span><span class="co">#&gt; Call:</span></span>
@@ -500,46 +502,99 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Fit: aov(formula = y ~ laboratory, data = data)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Quantile = 3.4603</span></span>
+<span><span class="co">#&gt; Quantile = 3.4625</span></span>
 <span><span class="co">#&gt; 95% family-wise confidence level</span></span>
 <span><span class="co">#&gt;  </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Linear Hypotheses:</span></span>
 <span><span class="co">#&gt;                  Estimate  lwr       upr      </span></span>
-<span><span class="co">#&gt; Lab2 - Lab1 == 0  0.156667 -2.847316  3.160650</span></span>
-<span><span class="co">#&gt; Lab3 - Lab1 == 0  0.166667 -2.837316  3.170650</span></span>
-<span><span class="co">#&gt; Lab4 - Lab1 == 0  0.173333 -2.830650  3.177316</span></span>
-<span><span class="co">#&gt; Lab5 - Lab1 == 0  0.180000 -2.823983  3.183983</span></span>
-<span><span class="co">#&gt; Lab6 - Lab1 == 0  0.736667 -2.267316  3.740650</span></span>
-<span><span class="co">#&gt; Lab7 - Lab1 == 0 -0.826667 -3.830650  2.177316</span></span>
-<span><span class="co">#&gt; Lab8 - Lab1 == 0  1.293333 -1.710650  4.297316</span></span>
-<span><span class="co">#&gt; Lab3 - Lab2 == 0  0.010000 -2.993983  3.013983</span></span>
-<span><span class="co">#&gt; Lab4 - Lab2 == 0  0.016667 -2.987316  3.020650</span></span>
-<span><span class="co">#&gt; Lab5 - Lab2 == 0  0.023333 -2.980650  3.027316</span></span>
-<span><span class="co">#&gt; Lab6 - Lab2 == 0  0.580000 -2.423983  3.583983</span></span>
-<span><span class="co">#&gt; Lab7 - Lab2 == 0 -0.983333 -3.987316  2.020650</span></span>
-<span><span class="co">#&gt; Lab8 - Lab2 == 0  1.136667 -1.867316  4.140650</span></span>
-<span><span class="co">#&gt; Lab4 - Lab3 == 0  0.006667 -2.997316  3.010650</span></span>
-<span><span class="co">#&gt; Lab5 - Lab3 == 0  0.013333 -2.990650  3.017316</span></span>
-<span><span class="co">#&gt; Lab6 - Lab3 == 0  0.570000 -2.433983  3.573983</span></span>
-<span><span class="co">#&gt; Lab7 - Lab3 == 0 -0.993333 -3.997316  2.010650</span></span>
-<span><span class="co">#&gt; Lab8 - Lab3 == 0  1.126667 -1.877316  4.130650</span></span>
-<span><span class="co">#&gt; Lab5 - Lab4 == 0  0.006667 -2.997316  3.010650</span></span>
-<span><span class="co">#&gt; Lab6 - Lab4 == 0  0.563333 -2.440650  3.567316</span></span>
-<span><span class="co">#&gt; Lab7 - Lab4 == 0 -1.000000 -4.003983  2.003983</span></span>
-<span><span class="co">#&gt; Lab8 - Lab4 == 0  1.120000 -1.883983  4.123983</span></span>
-<span><span class="co">#&gt; Lab6 - Lab5 == 0  0.556667 -2.447316  3.560650</span></span>
-<span><span class="co">#&gt; Lab7 - Lab5 == 0 -1.006667 -4.010650  1.997316</span></span>
-<span><span class="co">#&gt; Lab8 - Lab5 == 0  1.113333 -1.890650  4.117316</span></span>
-<span><span class="co">#&gt; Lab7 - Lab6 == 0 -1.563333 -4.567316  1.440650</span></span>
-<span><span class="co">#&gt; Lab8 - Lab6 == 0  0.556667 -2.447316  3.560650</span></span>
-<span><span class="co">#&gt; Lab8 - Lab7 == 0  2.120000 -0.883983  5.123983</span></span></code></pre></div>
-<p><br><br></p>
+<span><span class="co">#&gt; Lab2 - Lab1 == 0  0.156667 -2.849179  3.162513</span></span>
+<span><span class="co">#&gt; Lab3 - Lab1 == 0  0.166667 -2.839179  3.172513</span></span>
+<span><span class="co">#&gt; Lab4 - Lab1 == 0  0.173333 -2.832513  3.179179</span></span>
+<span><span class="co">#&gt; Lab5 - Lab1 == 0  0.180000 -2.825846  3.185846</span></span>
+<span><span class="co">#&gt; Lab6 - Lab1 == 0  0.736667 -2.269179  3.742513</span></span>
+<span><span class="co">#&gt; Lab7 - Lab1 == 0 -0.826667 -3.832513  2.179179</span></span>
+<span><span class="co">#&gt; Lab8 - Lab1 == 0  1.293333 -1.712513  4.299179</span></span>
+<span><span class="co">#&gt; Lab3 - Lab2 == 0  0.010000 -2.995846  3.015846</span></span>
+<span><span class="co">#&gt; Lab4 - Lab2 == 0  0.016667 -2.989179  3.022513</span></span>
+<span><span class="co">#&gt; Lab5 - Lab2 == 0  0.023333 -2.982513  3.029179</span></span>
+<span><span class="co">#&gt; Lab6 - Lab2 == 0  0.580000 -2.425846  3.585846</span></span>
+<span><span class="co">#&gt; Lab7 - Lab2 == 0 -0.983333 -3.989179  2.022513</span></span>
+<span><span class="co">#&gt; Lab8 - Lab2 == 0  1.136667 -1.869179  4.142513</span></span>
+<span><span class="co">#&gt; Lab4 - Lab3 == 0  0.006667 -2.999179  3.012513</span></span>
+<span><span class="co">#&gt; Lab5 - Lab3 == 0  0.013333 -2.992513  3.019179</span></span>
+<span><span class="co">#&gt; Lab6 - Lab3 == 0  0.570000 -2.435846  3.575846</span></span>
+<span><span class="co">#&gt; Lab7 - Lab3 == 0 -0.993333 -3.999179  2.012513</span></span>
+<span><span class="co">#&gt; Lab8 - Lab3 == 0  1.126667 -1.879179  4.132513</span></span>
+<span><span class="co">#&gt; Lab5 - Lab4 == 0  0.006667 -2.999179  3.012513</span></span>
+<span><span class="co">#&gt; Lab6 - Lab4 == 0  0.563333 -2.442513  3.569179</span></span>
+<span><span class="co">#&gt; Lab7 - Lab4 == 0 -1.000000 -4.005846  2.005846</span></span>
+<span><span class="co">#&gt; Lab8 - Lab4 == 0  1.120000 -1.885846  4.125846</span></span>
+<span><span class="co">#&gt; Lab6 - Lab5 == 0  0.556667 -2.449179  3.562513</span></span>
+<span><span class="co">#&gt; Lab7 - Lab5 == 0 -1.006667 -4.012513  1.999179</span></span>
+<span><span class="co">#&gt; Lab8 - Lab5 == 0  1.113333 -1.892513  4.119179</span></span>
+<span><span class="co">#&gt; Lab7 - Lab6 == 0 -1.563333 -4.569179  1.442513</span></span>
+<span><span class="co">#&gt; Lab8 - Lab6 == 0  0.556667 -2.449179  3.562513</span></span>
+<span><span class="co">#&gt; Lab8 - Lab7 == 0  2.120000 -0.885846  5.125846</span></span></code></pre></div>
+<p><br></p>
 </div>
 <div class="section level2">
 <h2 id="2-characterization-of-materials-by-thermogravimetric-analysis">2) Characterization of materials by thermogravimetric analysis<a class="anchor" aria-label="anchor" href="#2-characterization-of-materials-by-thermogravimetric-analysis"></a>
 </h2>
-<ul><li><strong>Graphical and analytical statistics</strong></li></ul>
+<ul><li><strong>Graphical and functional analytical statistics</strong></li></ul>
+<p>This exmample is about 7 (emulated) laboratories that analysed 15 samples of calcium oxalate by Thermogravimetric (TG) techniques, obtaining 105 TG curves that shows the mass loss of oxalate as a function of temperature when the oxalate samples were heated at 20◦C/min. The TG dataset contains the resulting values at 1000 discretization points, corresponding to temperatures ranging from 40◦C to 850◦C. Laboratories 1, 6, and 7 presented non-consistent results. In laboratory 1 a Simultaneous Thermal Analyzer (STA) was used with an out of phase calibration program. In laboratory 6, we used a simultaneous SDT analyser with an old calibration, and finally, in laboratory 7, we used a simultaneous SDT analyser with a bias in the the temperature calibration with respect to the real values (2◦C displaced with respect to the melting point of the zinc).</p>
+<p>From the TG curves, a second set of data called IDT was obtained. The IDT (Initial Decomposition Temperature) is a parameter defined by the temperature at which the studied material losses the 5% of its weight when it is heated at a constant rate. The dataset is composed of the IDT values of the calcium oxalate samples analyzed by the 7 laboratories. It is an example of ILS study with scalar response, obtained by extracting just only one representative feature from the TG curve. It is important to stress that when a feature extraction process is performed, there is the risk of loosing relevant information and thus obtaining erroneous findings.</p>
+<p>For the estimation of the functional statistics (for the performance of the graphical and analytical methods), the procedure is the same as for the scalar case. The ILS package provides the ils.fqcdata() function to generate the functional quality control data from a matrix (or a data.frame), in which each row represents a test result. The dimension of the matrix must be n×m, where n is the number of replicates performed by the laboratories that participate in the study, and m is the number of points observed in each curve. The usual methods were implemented to make plots and summaries of the resulting objects.</p>
+<p><br></p>
+<p>To create an object that contains the functional quality control data from the TG dataset, first we defined the grid in which the observations were obtained. In this case, the grid consists of 1000 temperature values ranging from 40◦C to 850◦C.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">TG</span><span class="op">)</span></span>
+<span><span class="va">delta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fl">40</span>, to <span class="op">=</span> <span class="fl">850</span>, length.out <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span>
+<span><span class="va">fqcdata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ILS/man/ils.fqcdata.html" class="external-link">ils.fqcdata</a></span><span class="op">(</span><span class="va">TG</span>, p <span class="op">=</span> <span class="fl">7</span>, argvals <span class="op">=</span> <span class="va">delta</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">fqcdata</span>,</span>
+<span>     main <span class="op">=</span> <span class="st">"TG curves of calcium oxalate"</span>,</span>
+<span>     xlab <span class="op">=</span> <span class="st">"Temperature (C)"</span>,</span>
+<span>     ylab <span class="op">=</span> <span class="st">"Mass (%)"</span>,</span>
+<span>     legend <span class="op">=</span> <span class="cn">TRUE</span>, x.co <span class="op">=</span> <span class="fl">20</span>, y.co <span class="op">=</span> <span class="fl">90</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-example_10-1.png" width="100%"></p>
+<p>In the figure above, the TG curves are presented. The following commands create a fqcstat object containing the functional statistics from fqcdata, and plot it afterwards.</p>
+<p><br></p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fqcstat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ILS/man/ils.fqcs.html" class="external-link">ils.fqcs</a></span><span class="op">(</span><span class="va">fqcdata</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">fqcstat</span>, xlab <span class="op">=</span> <span class="st">"Temperature (C)"</span>, ylab <span class="op">=</span> <span class="st">"Mass (%)"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-example_11-1.png" width="100%"></p>
+<p>The result is shown in this Figure. The plot() method creates a panel with four graphs, in the first row the functional means and variances for each laboratory are presented, while in the second row the global functional mean and variance are plotted.</p>
+<p><br></p>
+<ul><li><strong>Consistency tests</strong></li></ul>
+<p>With the aim to perform a r&amp;R study of the TG and DSC functional datasets described in the previous section, the corresponding statistics H(t), K(t), dH and dK will be estimated and graphically represented. As above mentioned, the TG dataset contains thermogravimetric test results from 7 laboratories, while the DSC dataset contains results from 6 laboratories (excluding laboratory 1). Laboratories 1, 5 and 6 have provided different results from the remaining laboratories and should be detected as outliers.</p>
+<p>Function mandel.fqcs() estimates the functional statistics Hl(t) and Kl(t), and the test statistics dKl and dHl, l = 1 . . . p. It also performs the bootstrap procedure described in [6] to approximate the cK and cH critical values, and to compute functional confidence bands for H(t) and K(t), under the corresponding null hypothesis. The results can be plotted with the default method.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">777</span><span class="op">)</span></span>
+<span><span class="va">mandel.tg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ILS/man/mandel.fqcs.html" class="external-link">mandel.fqcs</a></span><span class="op">(</span><span class="va">fqcdata</span>, nb <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">mandel.tg</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-example_12-1.png" width="100%"></p>
+<p>The left panels of the figure show the dKl and dHl test statistics for each laboratory, l = 1 . . . p, as well as the corresponding critical values cH and cK (horizontal lines), constructed at a significance level of α = 0.01. In the case of the dH statistic, it is concluded that laboratory 7 does not meet the reproducibility hypothesis (according with [6], laboratories 1, 6, and 7 were detected as outliers through an iterative process). When the repeatability hypothesis is tested by the dK test statistic, laboratory 6 is identified as an outlier in the first iteration.</p>
+<p>The right panels of the figure show the functional statistics Hl(t) and Kl(t) for each laboratory, l = 1 . . . p, as well as the corresponding confidence bands (dotted lines in black). Functional estimates with a significant large test statistic are shown with a solid line. These functional estimates allow us to identify in which time intervals the laboratories provide different results. In this case, the differences between the laboratory 7 and the remaining are in the interval corresponding to the first degradation process of calcium oxalate.</p>
+<p><br></p>
+<ul><li><strong>Outliers detection</strong></li></ul>
+<p>Finally, the ILS package is used to perform outlier detection tasks in the Interlaboratory Study defined by the DSC dataset.</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">DSC</span><span class="op">)</span></span>
+<span><span class="va">fqcdata.dsc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ILS/man/ils.fqcdata.html" class="external-link">ils.fqcdata</a></span><span class="op">(</span><span class="va">DSC</span>, p <span class="op">=</span> <span class="fl">6</span>,</span>
+<span>                           index.laboratory <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Lab"</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span>,</span>
+<span>                           argvals <span class="op">=</span> <span class="va">delta</span><span class="op">)</span></span>
+<span><span class="va">mandel.dsc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ILS/man/mandel.fqcs.html" class="external-link">mandel.fqcs</a></span><span class="op">(</span><span class="va">fqcdata.dsc</span>,</span>
+<span>                          nb <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">mandel.dsc</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-example_13-1.png" width="100%"></p>
+<p>The figure shows that repeatability hypothesis is not reject. Otherwise, the reproducibility hypothesis is rejected, and laboratory 6 is properly detected as an outlier (see top panels of the figure).</p>
+<p><br></p>
+</div>
+<div class="section level2">
+<h2 id="conclusions">Conclusions<a class="anchor" aria-label="anchor" href="#conclusions"></a>
+</h2>
+<p>The ILS package has been implemented in R software with the aim to provide the main descriptive and outlier detection tools dealing with the Interlaboratory Studies and recommended by the ISO 5725-4-1994 and ASTM E-691 standards. Namely, Mandels’s h and k test (including their graphical output), Grubbs’ test, Cochran’s test, in addition to ANOVA utilities.</p>
+<p>Moreover, apart from standard scalar statistical techniques, the ILS package provides FDA techniques to deal with functional data (curves), as data unit, in the framework of Interlaboratory Studies. Indeed, the main novelty of this computational proposal is the implementation of the functional extensions of the h and k Mandel’s statistics when data results are curves, preventing to lose relevant information derived from reduction dimension and feature extraction processes. These new methods can identify successfully the outlier laboratories directly from data curves.</p>
 </div>
 </div>
   </div>
